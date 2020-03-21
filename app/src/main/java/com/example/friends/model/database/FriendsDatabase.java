@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.friends.model.Friend;
+import com.example.friends.entity.Friend;
 
 @Database(entities = {Friend.class}, version = 1)
 public abstract class FriendsDatabase extends RoomDatabase {

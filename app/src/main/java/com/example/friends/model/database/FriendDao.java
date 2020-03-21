@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.friends.model.Friend;
+import com.example.friends.entity.Friend;
 
 import java.util.List;
 

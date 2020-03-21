@@ -1,4 +1,4 @@
-package com.example.friends.model;
+package com.example.friends.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
