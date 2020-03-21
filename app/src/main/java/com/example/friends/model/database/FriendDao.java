@@ -1,4 +1,4 @@
-package com.example.friends.model;
+package com.example.friends.model.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,6 +6,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.friends.model.Friend;
 
 import java.util.List;
 

@@ -1,10 +1,12 @@
-package com.example.friends.model;
+package com.example.friends.model.database;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.example.friends.model.Friend;
 
 @Database(entities = {Friend.class}, version = 1)
 public abstract class FriendsDatabase extends RoomDatabase {
