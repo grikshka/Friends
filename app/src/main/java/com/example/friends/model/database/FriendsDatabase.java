@@ -35,7 +35,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-
+            new PopulateTask(instance).execute();
         }
     };
 

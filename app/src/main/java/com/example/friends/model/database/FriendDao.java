@@ -23,6 +23,6 @@ public interface FriendDao {
     @Delete
     void delete(Friend friend);
 
-    @Query("SELECT * FROM friend ORDER BY favourite, name")
+    @Query("SELECT * FROM friend ORDER BY favourite DESC, name")
     LiveData<List<Friend>> getAll();
 }
