@@ -12,6 +12,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -37,6 +43,12 @@ dependencies {
 
     //RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+    //CardView
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    //CircularImageView
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
 
     // ViewModel & LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
