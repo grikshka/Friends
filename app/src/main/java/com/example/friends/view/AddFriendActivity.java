@@ -48,6 +48,8 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
 
         initializeDateObjects();
         initializeViews();
+        initializeDefaultValues();
+        initalizeListeners();
         initializeModel();
     }
 
@@ -64,13 +66,21 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         btnBirthday = findViewById(R.id.btnBirthday);
         etEmail = findViewById(R.id.etEmail);
         etWebsite = findViewById(R.id.etWebsite);
-
         imgFavorite = findViewById(R.id.imgFavorite);
-
         btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
+    }
 
+    private void initializeDefaultValues()
+    {
+        btnBirthday.setText(dateFormatter.format(calendar.getTime()));
+        imgFavorite.setImageResource(R.drawable.ic_favorite_false);
+        imgFavorite.setTag(R.drawable.ic_favorite_false);
+        btnSave.setEnabled(false);
+    }
 
+    private void initalizeListeners()
+    {
         etName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -87,30 +97,24 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
                 checkEnableSave();
             }
         });
-        btnBirthday.setText(dateFormatter.format(calendar.getTime()));
         btnBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
-
-        imgFavorite.setImageResource(R.drawable.ic_favorite_false);
-        imgFavorite.setTag(R.drawable.ic_favorite_false);
         imgFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickFavorite();
             }
         });
-
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickCancel();
             }
         });
-        btnSave.setEnabled(false);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
