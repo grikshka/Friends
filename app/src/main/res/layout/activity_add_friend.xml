@@ -90,12 +90,12 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnBirthday"
-                    android:layout_width="120dp"
+                    android:layout_width="140dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="12dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:strokeColor="@color/colorPrimaryDark"
-                    app:strokeWidth="2dp"
+                    app:strokeWidth="1dp"
                     android:text="@string/birthday_placeholder"
                     android:textColor="@color/colorPrimaryDark">
 
