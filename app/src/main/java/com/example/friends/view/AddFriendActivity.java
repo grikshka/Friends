@@ -19,6 +19,7 @@ import com.example.friends.entity.Friend;
 import com.example.friends.viewmodel.AddFriendViewModel;
 import com.google.android.material.button.MaterialButton;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -167,10 +168,23 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
     {
         String name = etName.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
+
+        String birthdayAsString = btnBirthday.getText().toString();
+        Date birthday;
+        try
+        {
+            birthday = birthdayAsString.isEmpty() ? null : dateFormatter.parse(birthdayAsString);
+        }
+        catch(ParseException e)
+        {
+            birthday = null;
+        }
+
         String email = etEmail.getText().toString().trim();
+        String website = etWebsite.getText().toString().trim();
         boolean favorite = getFavorite();
 
-        Friend friend = new Friend(name, phone, email, favorite);
+        Friend friend = new Friend(name, phone, birthday, email, website, favorite);
         addFriendViewModel.insert(friend);
         finish();
     }
