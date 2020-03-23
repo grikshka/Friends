@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +19,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
     private TextView etName;
     private TextView etEmail;
+    private TextView etPhone;
     private ImageView imgFavourite;
     private MaterialButton btnSave;
 
@@ -38,6 +38,7 @@ public class AddFriendActivity extends AppCompatActivity {
     {
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
+        etPhone = findViewById(R.id.etPhone);
         imgFavourite = findViewById(R.id.imgFavourite);
         MaterialButton btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
@@ -60,6 +61,23 @@ public class AddFriendActivity extends AppCompatActivity {
         });
 
         etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                checkEnableSave();
+            }
+        });
+
+        etPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -111,8 +129,9 @@ public class AddFriendActivity extends AppCompatActivity {
     {
         String name = etName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
+        String phone = etPhone.getText().toString().trim();
 
-        if(!name.isEmpty() && !email.isEmpty())
+        if(!name.isEmpty() && !email.isEmpty() && !phone.isEmpty())
         {
             btnSave.setEnabled(true);
         }
@@ -146,9 +165,10 @@ public class AddFriendActivity extends AppCompatActivity {
     {
         String name = etName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
+        String phone = etPhone.getText().toString().trim();
         boolean favourite = getFavourite();
 
-        Friend friend = new Friend(name, email, favourite);
+        Friend friend = new Friend(name, email, phone, favourite);
         addFriendViewModel.insert(friend);
         finish();
     }

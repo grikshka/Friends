@@ -11,11 +11,13 @@ public class Friend {
 
     private String name;
     private String email;
+    private String phone;
     private boolean favourite;
 
-    public Friend(String name, String email, boolean favourite) {
+    public Friend(String name, String email, String phone, boolean favourite) {
         this.name = name;
         this.email = email;
+        this.phone = phone;
         this.favourite = favourite;
     }
 
@@ -33,6 +35,11 @@ public class Friend {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPhone()
+    {
+        return phone;
     }
 
     public boolean isFavourite() {
