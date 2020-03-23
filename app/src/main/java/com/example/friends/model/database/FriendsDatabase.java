@@ -7,11 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.friends.entity.Friend;
+import com.example.friends.model.database.converter.Converters;
 
 @Database(entities = {Friend.class}, version = FriendsDatabase.VERSION)
+@TypeConverters({Converters.class})
 public abstract class FriendsDatabase extends RoomDatabase {
 
     public static final int VERSION = 1;
