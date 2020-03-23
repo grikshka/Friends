@@ -3,10 +3,12 @@ package com.example.friends.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,10 +20,13 @@ import com.google.android.material.button.MaterialButton;
 public class AddFriendActivity extends AppCompatActivity {
 
     private TextView etName;
-    private TextView etEmail;
     private TextView etPhone;
-    private ImageView imgFavourite;
+    private MaterialButton btnBirthday;
+    private TextView etEmail;
+    private TextView etWebsite;
+    private ImageView imgFavorite;
     private MaterialButton btnSave;
+    private MaterialButton btnCancel;
 
     private AddFriendViewModel addFriendViewModel;
 
@@ -37,11 +42,16 @@ public class AddFriendActivity extends AppCompatActivity {
     private void initializeViews()
     {
         etName = findViewById(R.id.etName);
-        etEmail = findViewById(R.id.etEmail);
         etPhone = findViewById(R.id.etPhone);
-        imgFavourite = findViewById(R.id.imgFavourite);
-        MaterialButton btnCancel = findViewById(R.id.btnCancel);
+        btnBirthday = findViewById(R.id.btnBirthday);
+        etEmail = findViewById(R.id.etEmail);
+        etWebsite = findViewById(R.id.etWebsite);
+
+        imgFavorite = findViewById(R.id.imgFavorite);
+
+        btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
+
 
         etName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -60,46 +70,12 @@ public class AddFriendActivity extends AppCompatActivity {
             }
         });
 
-        etEmail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                checkEnableSave();
-            }
-        });
-
-        etPhone.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                checkEnableSave();
-            }
-        });
-
-        imgFavourite.setImageResource(R.drawable.favourite_false);
-        imgFavourite.setTag(R.drawable.favourite_false);
-        imgFavourite.setOnClickListener(new View.OnClickListener() {
+        imgFavorite.setImageResource(R.drawable.ic_favorite_false);
+        imgFavorite.setTag(R.drawable.ic_favorite_false);
+        imgFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickFavourite();
+                clickFavorite();
             }
         });
 
@@ -109,7 +85,6 @@ public class AddFriendActivity extends AppCompatActivity {
                 clickCancel();
             }
         });
-
         btnSave.setEnabled(false);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,10 +103,8 @@ public class AddFriendActivity extends AppCompatActivity {
     private void checkEnableSave()
     {
         String name = etName.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String phone = etPhone.getText().toString().trim();
 
-        if(!name.isEmpty() && !email.isEmpty() && !phone.isEmpty())
+        if(!name.isEmpty())
         {
             btnSave.setEnabled(true);
         }
@@ -141,18 +114,18 @@ public class AddFriendActivity extends AppCompatActivity {
         }
     }
 
-    private void clickFavourite()
+    private void clickFavorite()
     {
-        Integer tag = (Integer) imgFavourite.getTag();
-        if(tag == R.drawable.favourite_false)
+        Integer tag = (Integer) imgFavorite.getTag();
+        if(tag == R.drawable.ic_favorite_false)
         {
-            imgFavourite.setImageResource(R.drawable.favourite_true);
-            imgFavourite.setTag(R.drawable.favourite_true);
+            imgFavorite.setImageResource(R.drawable.ic_favorite_true);
+            imgFavorite.setTag(R.drawable.ic_favorite_true);
         }
         else
         {
-            imgFavourite.setImageResource(R.drawable.favourite_false);
-            imgFavourite.setTag(R.drawable.favourite_false);
+            imgFavorite.setImageResource(R.drawable.ic_favorite_false);
+            imgFavorite.setTag(R.drawable.ic_favorite_false);
         }
     }
 
@@ -164,19 +137,19 @@ public class AddFriendActivity extends AppCompatActivity {
     private void clickSave()
     {
         String name = etName.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
-        boolean favourite = getFavourite();
+        String email = etEmail.getText().toString().trim();
+        boolean favorite = getFavorite();
 
-        Friend friend = new Friend(name, email, phone, favourite);
+        Friend friend = new Friend(name, phone, email, favorite);
         addFriendViewModel.insert(friend);
         finish();
     }
 
-    private boolean getFavourite()
+    private boolean getFavorite()
     {
-        Integer tag = (Integer) imgFavourite.getTag();
-        if(tag == R.drawable.favourite_true)
+        Integer tag = (Integer) imgFavorite.getTag();
+        if(tag == R.drawable.ic_favorite_true)
         {
             return true;
         }
