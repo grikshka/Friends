@@ -2,25 +2,26 @@ package com.example.friends.viewmodel;
 
 import android.app.Application;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.friends.entity.Friend;
 import com.example.friends.model.FriendRepository;
 
 import java.util.List;
 
-public class FriendViewModel extends AndroidViewModel {
+public class FriendViewModel extends ViewModel {
 
     private FriendRepository repository;
     private LiveData<List<Friend>> allFriends;
 
-    public FriendViewModel(@NonNull Application application)
+    public void initialize(Application application)
     {
-        super(application);
-        repository = new FriendRepository(application);
-        allFriends = repository.getAll();
+        if(repository == null)
+        {
+            repository = new FriendRepository(application);
+            allFriends = repository.getAll();
+        }
     }
 
     public void insert(Friend friend)
