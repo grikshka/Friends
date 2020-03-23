@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Friends</string>
     <string name="name_placeholder">Name</string>
+    <string name="email">Email</string>
     <string name="add_friend">Add Friend</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>
