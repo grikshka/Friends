@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +19,14 @@ import com.example.friends.entity.Friend;
 import com.example.friends.viewmodel.AddFriendViewModel;
 import com.google.android.material.button.MaterialButton;
 
-public class AddFriendActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+public class AddFriendActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
+    public final static String DATE_PATTERN = "dd/MM/yyyy";
 
     private TextView etName;
     private TextView etPhone;
@@ -29,14 +38,23 @@ public class AddFriendActivity extends AppCompatActivity {
     private MaterialButton btnCancel;
 
     private AddFriendViewModel addFriendViewModel;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
 
+        initializeDateObjects();
         initializeViews();
         initializeModel();
+    }
+
+    private void initializeDateObjects()
+    {
+        calendar = Calendar.getInstance();
+        dateFormatter = new SimpleDateFormat(DATE_PATTERN);
     }
 
     private void initializeViews()
@@ -67,6 +85,13 @@ public class AddFriendActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 checkEnableSave();
+            }
+        });
+        btnBirthday.setText(dateFormatter.format(calendar.getTime()));
+        btnBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
             }
         });
 
@@ -157,5 +182,24 @@ public class AddFriendActivity extends AppCompatActivity {
         {
             return false;
         }
+    }
+
+    private void showDatePickerDialog()
+    {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Date date = new GregorianCalendar(year, month, dayOfMonth).getTime();
+        btnBirthday.setText(dateFormatter.format(date));
     }
 }
