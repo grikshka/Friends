@@ -10,15 +10,15 @@ public class Friend {
     private int id;
 
     private String name;
-    private String email;
     private String phone;
-    private boolean favourite;
+    private String email;
+    private boolean favorite;
 
-    public Friend(String name, String email, String phone, boolean favourite) {
+    public Friend(String name, String phone, String email, boolean favorite) {
         this.name = name;
-        this.email = email;
         this.phone = phone;
-        this.favourite = favourite;
+        this.email = email;
+        this.favorite = favorite;
     }
 
     public void setId(int id) {
@@ -33,16 +33,16 @@ public class Friend {
         return name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public String getPhone()
     {
         return phone;
     }
 
-    public boolean isFavourite() {
-        return favourite;
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
     }
 }

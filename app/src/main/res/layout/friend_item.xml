@@ -31,8 +31,8 @@
             android:textColor="@color/colorPrimaryDark"
             android:layout_toRightOf="@id/imgProfilePicture"
             android:layout_toEndOf="@id/imgProfilePicture"
-            android:layout_toLeftOf="@id/imgFavourite"
-            android:layout_toStartOf="@id/imgFavourite"
+            android:layout_toLeftOf="@id/imgFavorite"
+            android:layout_toStartOf="@id/imgFavorite"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
@@ -45,13 +45,13 @@
         </TextView>
 
         <ImageView
-            android:id="@+id/imgFavourite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/imgFavorite"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/favourite_false">
+            android:src="@drawable/ic_favorite_false">
 
         </ImageView>
 

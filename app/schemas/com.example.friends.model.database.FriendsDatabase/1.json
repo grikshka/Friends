@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "6c813923f05affe4622c2ffe82d7751c",
+    "identityHash": "a268bad89f70861eae9fe93bcae90abe",
     "entities": [
       {
         "tableName": "Friend",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `email` TEXT, `phone` TEXT, `favourite` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `phone` TEXT, `email` TEXT, `favorite` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,20 +21,20 @@
             "notNull": false
           },
           {
-            "fieldPath": "email",
-            "columnName": "email",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "phone",
             "columnName": "phone",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "favourite",
-            "columnName": "favourite",
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "favorite",
+            "columnName": "favorite",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -52,7 +52,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6c813923f05affe4622c2ffe82d7751c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a268bad89f70861eae9fe93bcae90abe')"
     ]
   }
 }

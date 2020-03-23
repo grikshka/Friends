@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.friends.R;
 import com.example.friends.entity.Friend;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -36,13 +35,13 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
         {
             Friend currentFriend = friendList.get(position);
             holder.tvName.setText(currentFriend.getName());
-            if (currentFriend.isFavourite())
+            if (currentFriend.isFavorite())
             {
-                holder.imgFavourite.setImageResource(R.drawable.favourite_true);
+                holder.imgFavorite.setImageResource(R.drawable.ic_favorite_true);
             }
             else
             {
-                holder.imgFavourite.setImageResource(R.drawable.favourite_false);
+                holder.imgFavorite.setImageResource(R.drawable.ic_favorite_false);
             }
         }
 
@@ -70,13 +69,13 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
     {
         private CircleImageView imgProfilePicture;
         private TextView tvName;
-        private ImageView imgFavourite;
+        private ImageView imgFavorite;
 
         public FriendHolder(@NonNull View itemView) {
             super(itemView);
             imgProfilePicture = itemView.findViewById(R.id.imgProfilePicture);
             tvName = itemView.findViewById(R.id.tvName);
-            imgFavourite = itemView.findViewById(R.id.imgFavourite);
+            imgFavorite = itemView.findViewById(R.id.imgFavorite);
         }
     }
 }

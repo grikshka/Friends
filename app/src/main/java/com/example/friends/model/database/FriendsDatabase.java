@@ -53,19 +53,19 @@ public abstract class FriendsDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids)
         {
-            friendDao.insert(new Friend("Grzegorz Charyszczak", "schemabuoi@gmail.com", "+48 502 288 995", true));
-            friendDao.insert(new Friend("Oliwia Skrzypaszek", "oliwiaskrzypaszek@gmail.com", "+48 690 421 069", true));
-            friendDao.insert(new Friend("Marcin Dwornikowski", "mdwornikowski@gmail.com", "+48 607 412 984", true));
-            friendDao.insert(new Friend("Iga Molendowska", "igamolendowska@gmail.com", "+48 883 736 886", true));
-            friendDao.insert(new Friend("David Kalatzis", "davidkalatzis@gmail.com", "+45 81 90 84 96", true));
-            friendDao.insert(new Friend("Mate Kiss", "matekiss@gmail.com", "+45 50 32 43 85", false));
-            friendDao.insert(new Friend("Nedas Surkus", "nedassurkus@gmail.com", "+45 16 78 34 72", false));
-            friendDao.insert(new Friend("Marek Stancik", "marekstancik@gmail.com", "+45 74 67 83 12", false));
-            friendDao.insert(new Friend("Jan Toth", "jantoth@gmail.com", "+45 66 40 15 91", false));
-            friendDao.insert(new Friend("Alex Pedersen", "alexpedersen@gmail.com", "+45 40 31 15 20", false));
-            friendDao.insert(new Friend("Kuba Rewald", "kubarewald@gmail.com", "+45 72 21 14 15", false));
-            friendDao.insert(new Friend("Radoslaw Haller", "radoslawhaller@gmail.com", "+45 40 20 76 91", false));
-            friendDao.insert(new Friend("Adi Tutor", "aditutor@gmail.com", "+45 59 91 15 20", false));
+            friendDao.insert(new Friend("Grzegorz Charyszczak", "+48 502 288 995", "schemabuoi@gmail.com", true));
+            friendDao.insert(new Friend("Oliwia Skrzypaszek", "+48 690 421 069", "oliwiaskrzypaszek@gmail.com", true));
+            friendDao.insert(new Friend("Marcin Dwornikowski", "+48 607 412 984", "mdwornikowski@gmail.com", true));
+            friendDao.insert(new Friend("Iga Molendowska", "+48 883 736 886", "igamolendowska@gmail.com", true));
+            friendDao.insert(new Friend("David Kalatzis", "+45 81 90 84 96", "davidkalatzis@gmail.com", true));
+            friendDao.insert(new Friend("Mate Kiss", "+45 50 32 43 85", "matekiss@gmail.com", false));
+            friendDao.insert(new Friend("Nedas Surkus", "+45 16 78 34 72", "nedassurkus@gmail.com", false));
+            friendDao.insert(new Friend("Marek Stancik", "+45 74 67 83 12", "marekstancik@gmail.com", false));
+            friendDao.insert(new Friend("Jan Toth", "+45 66 40 15 91", "jantoth@gmail.com", false));
+            friendDao.insert(new Friend("Alex Pedersen", "+45 40 31 15 20", "alexpedersen@gmail.com", false));
+            friendDao.insert(new Friend("Kuba Rewald", "+45 72 21 14 15", "kubarewald@gmail.com", false));
+            friendDao.insert(new Friend("Radoslaw Haller", "+45 40 20 76 91", "radoslawhaller@gmail.com", false));
+            friendDao.insert(new Friend("Adi Tutor", "+45 59 91 15 20", "aditutor@gmail.com", false));
             return null;
         }
     }
