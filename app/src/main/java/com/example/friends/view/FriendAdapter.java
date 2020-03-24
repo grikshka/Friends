@@ -1,5 +1,7 @@
 package com.example.friends.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,16 +35,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
     public void onBindViewHolder(@NonNull FriendHolder holder, int position) {
         if(friendList != null)
         {
-            Friend currentFriend = friendList.get(position);
-            holder.tvName.setText(currentFriend.getName());
-            if (currentFriend.isFavorite())
-            {
-                holder.imgFavorite.setImageResource(R.drawable.ic_favorite_true);
-            }
-            else
-            {
-                holder.imgFavorite.setImageResource(R.drawable.ic_favorite_false);
-            }
+            holder.setView(friendList.get(position));
         }
 
     }
@@ -65,8 +58,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
         notifyDataSetChanged();
     }
 
-    class FriendHolder extends RecyclerView.ViewHolder
+    class FriendHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
+        private Friend friend;
+
         private CircleImageView imgProfilePicture;
         private TextView tvName;
         private ImageView imgFavorite;
@@ -76,6 +71,34 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
             imgProfilePicture = itemView.findViewById(R.id.imgProfilePicture);
             tvName = itemView.findViewById(R.id.tvName);
             imgFavorite = itemView.findViewById(R.id.imgFavorite);
+            itemView.setOnClickListener(this);
+        }
+
+        public void setView(Friend friend)
+        {
+            this.friend = friend;
+            tvName.setText(friend.getName());
+            if (friend.isFavorite())
+            {
+                imgFavorite.setImageResource(R.drawable.ic_favorite_true);
+            }
+            else
+            {
+               imgFavorite.setImageResource(R.drawable.ic_favorite_false);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+                startFriendDetailsActivity(v);
+        }
+
+        private void startFriendDetailsActivity(View v)
+        {
+            Intent intent = new Intent(v.getContext(), FriendDetailsActivity.class);
+            v.getContext().startActivity(intent);
         }
     }
+
+
 }
