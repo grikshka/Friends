@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Friends</string>
     <string name="name">Name</string>
+    <string name="name_placeholder">Grzegorz Charyszczak</string>
     <string name="email">Email</string>
+    <string name="email_placeholder">charyszczakg@gmail.com</string>
     <string name="phone">Phone</string>
+    <string name="call">Call</string>
+    <string name="message">Message</string>
+    <string name="phone_placeholder">+48 502 288 995</string>
     <string name="website">Website</string>
+    <string name="website_placeholder">www.schemabuoi.github.io</string>
     <string name="birthday">Birthday</string>
     <string name="birthday_placeholder">01/01/2020</string>
     <string name="add_friend">Add Friend</string>
