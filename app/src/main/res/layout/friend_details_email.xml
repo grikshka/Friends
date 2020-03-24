@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgEmailData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_email_small"
+        android:layout_marginTop="20dp">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tvEmailData"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/imgEmailData"
+        android:layout_toRightOf="@id/imgEmailData"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/email_placeholder"
+        android:textColor="@color/colorPrimaryDark">
+    </TextView>
+
+    <View
+        android:id="@+id/lineEmailDataSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/imgEmailData"
+        android:background="@color/colorSecondaryDark"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>

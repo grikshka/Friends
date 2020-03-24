@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgBirthdayData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_birthday_small"
+        android:layout_marginTop="20dp">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tvBirthdayData"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:layout_marginTop="22dp"
+        android:layout_toEndOf="@id/imgBirthdayData"
+        android:layout_toRightOf="@id/imgBirthdayData"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/birthday_placeholder"
+        android:textColor="@color/colorPrimaryDark">
+    </TextView>
+
+</RelativeLayout>
