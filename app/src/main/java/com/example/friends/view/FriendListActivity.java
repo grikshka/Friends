@@ -19,27 +19,41 @@ import java.util.List;
 
 public class FriendListActivity extends AppCompatActivity {
 
+    private RecyclerView recFriends;
+    private MaterialButton btnAddFriend;
+
     private FriendsListViewModel friendsListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_friends_list);
 
+        initializeViews();
+        initializeViewModel();
         initializeRecyclerView();
         initializeAddFriendButton();
     }
 
+    private void initializeViews()
+    {
+        recFriends = findViewById(R.id.recFriends);
+        btnAddFriend = findViewById(R.id.btnAddFriend);
+    }
+
+    private void initializeViewModel()
+    {
+        friendsListViewModel = new ViewModelProvider(this).get(FriendsListViewModel.class);
+        friendsListViewModel.initialize(getApplication());
+    }
+
     private void initializeRecyclerView()
     {
-        RecyclerView recFriends = findViewById(R.id.recFriends);
         final FriendAdapter adapter = new FriendAdapter();
         recFriends.setLayoutManager(new LinearLayoutManager(this));
         recFriends.setHasFixedSize(true);
         recFriends.setAdapter(adapter);
 
-        friendsListViewModel = new ViewModelProvider(this).get(FriendsListViewModel.class);
-        friendsListViewModel.initialize(getApplication());
         friendsListViewModel.getAllFriends().observe(this, new Observer<List<Friend>>() {
             @Override
             public void onChanged(List<Friend> friends) {
@@ -50,8 +64,7 @@ public class FriendListActivity extends AppCompatActivity {
 
     private void initializeAddFriendButton()
     {
-        MaterialButton addFriend = findViewById(R.id.btnAddFriend);
-        addFriend.setOnClickListener(new View.OnClickListener() {
+        btnAddFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startAddFriendActivity();

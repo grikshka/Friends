@@ -45,11 +45,11 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
 
+        initializeViewModel();
         initializeDateObjects();
         initializeViews();
         initializeDefaultValues();
         initalizeListeners();
-        initializeModel();
     }
 
     private void initializeDateObjects()
@@ -122,7 +122,7 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         });
     }
 
-    private void initializeModel()
+    private void initializeViewModel()
     {
         addFriendViewModel = new ViewModelProvider(this).get(AddFriendViewModel.class);
         addFriendViewModel.initialize(getApplication());
@@ -166,18 +166,7 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
     {
         String name = etName.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
-
-        String birthdayAsString = btnBirthday.getText().toString();
-        Date birthday;
-        try
-        {
-            birthday = birthdayAsString.isEmpty() ? null : dateFormatter.parse(birthdayAsString);
-        }
-        catch(ParseException e)
-        {
-            birthday = null;
-        }
-
+        Date birthday = getBirthday();
         String email = etEmail.getText().toString().trim();
         String website = etWebsite.getText().toString().trim();
         boolean favorite = getFavorite();
@@ -197,6 +186,19 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         else
         {
             return false;
+        }
+    }
+
+    private Date getBirthday()
+    {
+        String birthdayAsString = btnBirthday.getText().toString();
+        try
+        {
+            return birthdayAsString.isEmpty() ? null : dateFormatter.parse(birthdayAsString);
+        }
+        catch(ParseException e)
+        {
+            return null;
         }
     }
 
