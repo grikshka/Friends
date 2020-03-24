@@ -38,6 +38,11 @@ public class FriendRepository {
         new DeleteTask(friendDao).execute(friend);
     }
 
+    public LiveData<Friend> get(int id)
+    {
+        return friendDao.get(id);
+    }
+
     public LiveData<List<Friend>> getAll()
     {
         return allFriends;
