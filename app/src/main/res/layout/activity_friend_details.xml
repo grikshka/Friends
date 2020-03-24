@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relFriendDetailsContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.FriendDetailsActivity"
+    android:padding="12dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgProfilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        app:civ_border_width="1dp"
+        android:src="@drawable/user_icon">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/imgProfilePicture"
+        android:text="@string/name_placeholder"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPrimaryDark"
+        >
+
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/linActionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvName"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:id="@+id/imgPhone"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_phone_active">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/imgMessage"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_message_active">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/imgEmail"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_email_active">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/imgWebsite"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_website_active">
+
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linActionLabelContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linActionContainer"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="4dp">
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/phone"
+            android:textSize="11sp"
+            android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@style/autoscroll">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/message"
+            android:textSize="11sp"
+            android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@style/autoscroll">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/email"
+            android:textColor="@color/colorPrimary"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@style/autoscroll">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvWebsite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/website"
+            android:textColor="@color/colorPrimary"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@style/autoscroll">
+
+        </TextView>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/lineFriendDataSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/linActionLabelContainer"
+        android:layout_marginTop="24dp"
+        android:background="@color/colorPrimaryDark"/>
+
+    <ScrollView
+        android:id="@+id/scrFriendDataContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lineFriendDataSeparator"
+        android:layout_marginTop="6dp"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/linFriendDataContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
