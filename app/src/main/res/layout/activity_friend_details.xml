@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.FriendDetailsActivity"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:clipToPadding="false">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgProfilePicture"
@@ -14,7 +15,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        app:civ_border_width="1dp"
+
         app:civ_border_color="@color/colorPrimaryDark"
         android:src="@drawable/user_icon">
 
@@ -25,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_below="@id/imgProfilePicture"
         android:text="@string/name_placeholder"
         android:maxLines="1"
@@ -96,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/phone"
+            android:text="@string/call"
             android:textSize="11sp"
             android:textColor="@color/colorPrimary"
             android:maxLines="1"
@@ -126,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/email"
+            android:text="@string/mail"
             android:textColor="@color/colorPrimary"
             android:textSize="11sp"
             android:maxLines="1"
@@ -141,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/website"
+            android:text="@string/visit"
             android:textColor="@color/colorPrimary"
             android:textSize="11sp"
             android:maxLines="1"
@@ -159,6 +160,8 @@
         android:layout_height="1dp"
         android:layout_below="@id/linActionLabelContainer"
         android:layout_marginTop="24dp"
+        android:layout_marginStart="-12dp"
+        android:layout_marginEnd="-12dp"
         android:background="@color/colorPrimaryDark"/>
 
     <ScrollView

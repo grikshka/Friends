@@ -2,23 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relWebsiteDataContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgWebsiteData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_website_small"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="24dp">
 
     </ImageView>
 
     <TextView
         android:id="@+id/tvWebsiteData"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_centerInParent="true"
         android:layout_toEndOf="@id/imgWebsiteData"
         android:layout_toRightOf="@id/imgWebsiteData"
         android:layout_marginLeft="16dp"
