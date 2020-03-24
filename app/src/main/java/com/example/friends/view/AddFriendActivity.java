@@ -3,13 +3,11 @@ package com.example.friends.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -185,7 +183,7 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         boolean favorite = getFavorite();
 
         Friend friend = new Friend(name, phone, birthday, email, website, favorite);
-        addFriendViewModel.insert(friend);
+        addFriendViewModel.insertFriend(friend);
         finish();
     }
 

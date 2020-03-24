@@ -10,7 +10,7 @@ import com.example.friends.model.FriendRepository;
 
 import java.util.List;
 
-public class FriendViewModel extends ViewModel {
+public class FriendsListViewModel extends ViewModel {
 
     private FriendRepository repository;
     private LiveData<List<Friend>> allFriends;
@@ -24,22 +24,7 @@ public class FriendViewModel extends ViewModel {
         }
     }
 
-    public void insert(Friend friend)
-    {
-        repository.insert(friend);
-    }
-
-    public void update(Friend friend)
-    {
-        repository.update(friend);
-    }
-
-    public void delete(Friend friend)
-    {
-        repository.delete(friend);
-    }
-
-    public LiveData<List<Friend>> getAll()
+    public LiveData<List<Friend>> getAllFriends()
     {
         return allFriends;
     }

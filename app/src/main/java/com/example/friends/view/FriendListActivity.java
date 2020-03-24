@@ -12,14 +12,14 @@ import android.view.View;
 
 import com.example.friends.R;
 import com.example.friends.entity.Friend;
-import com.example.friends.viewmodel.FriendViewModel;
+import com.example.friends.viewmodel.FriendsListViewModel;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class FriendListActivity extends AppCompatActivity {
 
-    private FriendViewModel friendViewModel;
+    private FriendsListViewModel friendsListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         recFriends.setHasFixedSize(true);
         recFriends.setAdapter(adapter);
 
-        friendViewModel = new ViewModelProvider(this).get(FriendViewModel.class);
-        friendViewModel.initialize(getApplication());
-        friendViewModel.getAll().observe(this, new Observer<List<Friend>>() {
+        friendsListViewModel = new ViewModelProvider(this).get(FriendsListViewModel.class);
+        friendsListViewModel.initialize(getApplication());
+        friendsListViewModel.getAllFriends().observe(this, new Observer<List<Friend>>() {
             @Override
             public void onChanged(List<Friend> friends) {
                 adapter.setFriendList(friends);
