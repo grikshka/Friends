@@ -9,23 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".view.FriendDetailsActivity">
 
         </activity>
+
         <activity
             android:name=".view.AddFriendActivity"
             android:label="@string/add_friend">
 
         </activity>
-        <activity android:name=".view.FriendListActivity">
+
+        <activity
+            android:name=".view.FriendListActivity"
+            android:theme="@style/NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
+
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.INTERNET" />

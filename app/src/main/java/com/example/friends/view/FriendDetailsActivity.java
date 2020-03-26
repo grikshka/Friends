@@ -1,13 +1,16 @@
 package com.example.friends.view;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +55,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
         int friendId = getIntent().getIntExtra("EXTRA_FRIEND_ID", 0);
 
         initializeViews();
+        setUpActionBar();
         initializeViewModel(friendId);
     }
 
@@ -67,6 +71,13 @@ public class FriendDetailsActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmail);
         tvWebsite = findViewById(R.id.tvWebsite);
         linFriendDataContainer = findViewById(R.id.linFriendDataContainer);
+    }
+
+    private void setUpActionBar()
+    {
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources()
+//                .getColor(R.color.colorSecondaryDark)));
     }
 
     private void initializeViewModel(int friendId)
@@ -101,11 +112,11 @@ public class FriendDetailsActivity extends AppCompatActivity {
         {
             imgPhone.setImageResource(R.drawable.ic_phone_disabled);
             imgPhone.setOnClickListener(null);
-            tvPhone.setTextColor(getResources().getColor(R.color.colorDisabled));
+            tvPhone.setTextColor(ContextCompat.getColor(this, R.color.colorDisabled));
 
             imgMessage.setImageResource(R.drawable.ic_message_disabled);
             imgMessage.setOnClickListener(null);
-            tvMessage.setTextColor(getResources().getColor(R.color.colorDisabled));
+            tvMessage.setTextColor(ContextCompat.getColor(this, R.color.colorDisabled));
         }
         else
         {
@@ -116,7 +127,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
                     makeCallCheckPermission();
                 }
             });
-            tvPhone.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tvPhone.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
 
             imgMessage.setImageResource(R.drawable.ic_message_active);
             imgMessage.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +137,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
                 }
             });
 
-            tvMessage.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tvMessage.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
     }
 
@@ -136,7 +147,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
         {
             imgEmail.setImageResource(R.drawable.ic_email_disabled);
             imgEmail.setOnClickListener(null);
-            tvEmail.setTextColor(getResources().getColor(R.color.colorDisabled));
+            tvEmail.setTextColor(ContextCompat.getColor(this, R.color.colorDisabled));
         }
         else
         {
@@ -147,7 +158,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
                     sendMail();
                 }
             });
-            tvEmail.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tvEmail.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
     }
 
@@ -157,7 +168,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
         {
             imgWebsite.setImageResource(R.drawable.ic_website_disabled);
             imgWebsite.setOnClickListener(null);
-            tvWebsite.setTextColor(getResources().getColor(R.color.colorDisabled));
+            tvWebsite.setTextColor(ContextCompat.getColor(this, R.color.colorDisabled));
         }
         else
         {
@@ -168,7 +179,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
                     openWebsiteCheckPermission();
                 }
             });
-            tvWebsite.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tvWebsite.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
     }
 
