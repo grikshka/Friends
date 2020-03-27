@@ -1,12 +1,15 @@
 package com.example.friends.view;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -34,7 +37,6 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
     private TextView etWebsite;
     private ImageView imgFavorite;
     private MaterialButton btnSave;
-    private MaterialButton btnCancel;
 
     private AddFriendViewModel addFriendViewModel;
     private Calendar calendar;
@@ -48,6 +50,7 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         initializeViewModel();
         initializeDateObjects();
         initializeViews();
+        setUpActionBar();
         initializeDefaultValues();
         initalizeListeners();
     }
@@ -66,8 +69,32 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         etEmail = findViewById(R.id.etEmail);
         etWebsite = findViewById(R.id.etWebsite);
         imgFavorite = findViewById(R.id.imgFavorite);
-        btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
+    }
+
+    private void setUpActionBar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+            case android.R.id.home:
+            {
+                finish();
+                return true;
+            }
+            default:
+            {
+                return super.onOptionsItemSelected(item);
+            }
+        }
     }
 
     private void initializeDefaultValues()
@@ -106,12 +133,6 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
             @Override
             public void onClick(View v) {
                 clickFavorite();
-            }
-        });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickCancel();
             }
         });
         btnSave.setOnClickListener(new View.OnClickListener() {

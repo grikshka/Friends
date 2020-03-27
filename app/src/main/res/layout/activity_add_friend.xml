@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollAddFriendContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".view.AddFriendActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar">
+
+    </include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar">
 
         <RelativeLayout
             android:id="@+id/relFriendDataContainer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
             <LinearLayout
                 android:id="@+id/linNameContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/imgName"
@@ -193,41 +204,20 @@
 
             </ImageView>
 
-            <LinearLayout
-                android:id="@+id/linButtonsContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                app:cornerRadius="10dp"
+                android:text="@string/save"
                 android:layout_below="@id/imgFavorite"
-                android:layout_marginTop="32dp">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCancel"
-                    android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="10dp"
-                    android:layout_gravity="center"
-                    app:cornerRadius="25dp"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:text="@string/cancel"
-
-                    >
-                </com.google.android.material.button.MaterialButton>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSave"
-                    android:layout_width="150dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="10dp"
-                    android:layout_gravity="center"
-                    app:cornerRadius="25dp"
-                    android:text="@string/save"
-                    >
-                </com.google.android.material.button.MaterialButton>
-
-            </LinearLayout>
+                android:layout_marginTop="32dp"
+                android:layout_centerHorizontal="true"
+                >
+            </com.google.android.material.button.MaterialButton>
 
         </RelativeLayout>
 
-</ScrollView>
+    </ScrollView>
+
+</RelativeLayout>
