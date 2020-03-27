@@ -1,6 +1,8 @@
 package com.example.friends.view;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.friends.R;
@@ -20,7 +25,6 @@ import java.util.List;
 public class FriendListActivity extends AppCompatActivity {
 
     private RecyclerView recFriends;
-    private MaterialButton btnAddFriend;
 
     private FriendsListViewModel friendsListViewModel;
 
@@ -31,20 +35,53 @@ public class FriendListActivity extends AppCompatActivity {
 
         initializeViews();
         initializeViewModel();
+        setUpActionBar();
         initializeRecyclerView();
-        initializeAddFriendButton();
     }
 
     private void initializeViews()
     {
         recFriends = findViewById(R.id.recFriends);
-        btnAddFriend = findViewById(R.id.btnAddFriend);
     }
 
     private void initializeViewModel()
     {
         friendsListViewModel = new ViewModelProvider(this).get(FriendsListViewModel.class);
         friendsListViewModel.initialize(getApplication());
+    }
+
+    private void setUpActionBar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_friends_list, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+            case android.R.id.home:
+            {
+                finish();
+                return true;
+            }
+            case R.id.action_add:
+            {
+                startAddFriendActivity();
+                return true;
+            }
+            default:
+            {
+                return super.onOptionsItemSelected(item);
+            }
+        }
     }
 
     private void initializeRecyclerView()
@@ -60,17 +97,6 @@ public class FriendListActivity extends AppCompatActivity {
                 adapter.setFriendList(friends);
             }
         });
-    }
-
-    private void initializeAddFriendButton()
-    {
-        btnAddFriend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAddFriendActivity();
-            }
-        });
-
     }
 
     private void startAddFriendActivity()
