@@ -6,163 +6,173 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.FriendDetailsActivity"
-    android:padding="12dp"
     android:clipToPadding="false">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgProfilePicture"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar">
 
-        app:civ_border_color="@color/colorPrimaryDark"
-        android:src="@drawable/user_icon">
+    </include>
 
-    </de.hdodenhof.circleimageview.CircleImageView>
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/imgProfilePicture"
-        android:text="@string/name_placeholder"
-        android:maxLines="1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorPrimaryDark"
-        >
-
-    </TextView>
-
-    <LinearLayout
-        android:id="@+id/linActionContainer"
+    <RelativeLayout
+        android:id="@+id/relHeaderContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvName"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="24dp">
+        android:layout_below="@id/toolbar"
+        android:paddingBottom="10dp">
 
-        <ImageView
-            android:id="@+id/imgPhone"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_phone_active">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgProfilePicture"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerHorizontal="true"
+            app:civ_border_color="@color/colorPrimaryDark"
+            android:src="@drawable/user_icon">
 
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/imgMessage"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_message_active">
-
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/imgEmail"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_email_active">
-
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/imgWebsite"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_website_active">
-
-        </ImageView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linActionLabelContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linActionContainer"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="4dp">
+        </de.hdodenhof.circleimageview.CircleImageView>
 
         <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="0dp"
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/call"
-            android:textSize="11sp"
-            android:textColor="@color/colorPrimary"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/imgProfilePicture"
+            android:text="@string/name_placeholder"
             android:maxLines="1"
-            android:ellipsize="end"
-            style="@style/autoscroll">
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorPrimaryDark"
+            >
 
         </TextView>
 
-        <TextView
-            android:id="@+id/tvMessage"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/linActionContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_below="@id/tvName"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:text="@string/message"
-            android:textSize="11sp"
-            android:textColor="@color/colorPrimary"
-            android:maxLines="1"
-            android:ellipsize="end"
-            style="@style/autoscroll">
+            android:layout_marginTop="30dp">
 
-        </TextView>
+            <ImageView
+                android:id="@+id/imgPhone"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_phone_active">
 
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="0dp"
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgMessage"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_message_active">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgEmail"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_email_active">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgWebsite"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_website_active">
+
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linActionLabelContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_below="@id/linActionContainer"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:text="@string/mail"
-            android:textColor="@color/colorPrimary"
-            android:textSize="11sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            style="@style/autoscroll">
+            android:layout_marginTop="4dp">
 
-        </TextView>
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/call"
+                android:textSize="11sp"
+                android:textColor="@color/colorPrimary"
+                android:maxLines="1"
+                android:ellipsize="end"
+                style="@style/autoscroll">
 
-        <TextView
-            android:id="@+id/tvWebsite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/visit"
-            android:textColor="@color/colorPrimary"
-            android:textSize="11sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            style="@style/autoscroll">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/message"
+                android:textSize="11sp"
+                android:textColor="@color/colorPrimary"
+                android:maxLines="1"
+                android:ellipsize="end"
+                style="@style/autoscroll">
 
+            </TextView>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/mail"
+                android:textColor="@color/colorPrimary"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                style="@style/autoscroll">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvWebsite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/visit"
+                android:textColor="@color/colorPrimary"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                style="@style/autoscroll">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <View
         android:id="@+id/lineFriendDataSeparator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/linActionLabelContainer"
-        android:layout_marginTop="24dp"
+        android:layout_below="@id/relHeaderContainer"
+        android:layout_marginTop="14dp"
         android:layout_marginStart="-12dp"
         android:layout_marginEnd="-12dp"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@color/colorDisabled"/>
 
     <ScrollView
         android:id="@+id/scrFriendDataContainer"
