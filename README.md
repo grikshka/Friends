@@ -1,2 +1,2 @@
 # Friends
- Small application made in Android Studio to explore different functionalities
+Friends application made for Android using MVVC and Android Architecture Components
