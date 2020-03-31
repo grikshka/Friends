@@ -2,6 +2,8 @@ package com.example.friends.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.friends.R;
 import com.example.friends.entity.Friend;
 
@@ -60,6 +63,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
 
     class FriendHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
+        private Context context;
         private Friend friend;
 
         private CircleImageView imgProfilePicture;
@@ -68,6 +72,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
 
         public FriendHolder(@NonNull View itemView) {
             super(itemView);
+            this.context = itemView.getContext();
             imgProfilePicture = itemView.findViewById(R.id.imgProfilePicture);
             tvName = itemView.findViewById(R.id.tvName);
             imgFavorite = itemView.findViewById(R.id.imgFavorite);
@@ -78,6 +83,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
         {
             this.friend = friend;
             tvName.setText(friend.getName());
+
             if (friend.isFavorite())
             {
                 imgFavorite.setImageResource(R.drawable.ic_favorite_true);
@@ -86,6 +92,27 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
             {
                imgFavorite.setImageResource(R.drawable.ic_favorite_false);
             }
+
+            if(!(friend.getPicturePath() == null) && !friend.getPicturePath().isEmpty())
+            {
+                setProfilePicture(friend.getPicturePath());
+            }
+            else
+            {
+                imgProfilePicture.setImageResource(R.drawable.user_icon);
+            }
+        }
+
+        /*
+            Using Glide library for setting the profile picture to benefit
+            from image caching and simplifying complex task of setting bitmap
+            to achieve smooth behaviour and fast decoding
+        */
+        private void setProfilePicture(String pathToImage)
+        {
+            Glide.with(context)
+                    .load(pathToImage)
+                    .into(imgProfilePicture);
         }
 
         @Override
