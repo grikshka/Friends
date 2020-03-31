@@ -17,14 +17,16 @@ public class Friend {
     private String email;
     private String website;
     private boolean favorite;
+    private String picturePath;
 
-    public Friend(String name, String phone, Date birthday, String email, String website, boolean favorite) {
+    public Friend(String name, String phone, Date birthday, String email, String website, boolean favorite, String picturePath) {
         this.name = name;
         this.phone = phone;
         this.birthday = birthday;
         this.email = email;
         this.website = website;
         this.favorite = favorite;
+        this.picturePath = picturePath;
     }
 
     public void setId(int id) {
@@ -58,5 +60,9 @@ public class Friend {
 
     public boolean isFavorite() {
         return favorite;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
     }
 }

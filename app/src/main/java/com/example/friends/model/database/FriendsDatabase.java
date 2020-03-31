@@ -65,7 +65,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                      new GregorianCalendar(1998, 8, 16).getTime(),
                     "schemabuoi@gmail.com",
                     "www.schemabuoi.github.io/grzegorz-charyszczak/",
-                    true));
+                    true,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Oliwia Skrzypaszek",
@@ -73,7 +74,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                      new GregorianCalendar(2000, 5, 24).getTime(),
                     "oliwiaskrzypaszek@gmail.com",
                     "www.skrzypaszek.pl",
-                    true));
+                    true,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Marcin Dwornikowski",
@@ -81,7 +83,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     new GregorianCalendar(1998, 4, 24).getTime(),
                     "mdwornikowski@gmail.com",
                     "www.mdwornikowski.com/",
-                    true));
+                    true,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Iga Molendowska",
@@ -89,7 +92,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     new GregorianCalendar(1998, 3, 24).getTime(),
                     "igamolendowska@gmail.com",
                     "",
-                    true));
+                    true,
+                    ""));
 
             friendDao.insert(new Friend(
                     "David Kalatzis",
@@ -97,7 +101,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     null,
                     "davidkalatzis@gmail.com",
                     "www.kidagine.github.io/davidkalatzis/",
-                    true));
+                    true,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Mate Kiss",
@@ -105,7 +110,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     new GregorianCalendar(1997, 3, 24).getTime(),
                     "matekiss@gmail.com",
                     "",
-                    false));
+                    false,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Nedas Surkus",
@@ -113,7 +119,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     null,
                     "nedassurkus@gmail.com",
                     "",
-                    false));
+                    false,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Marek Stancik",
@@ -121,7 +128,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     null,
                     "marekstancik@gmail.com",
                     "",
-                    false));
+                    false,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Jan Toth",
@@ -129,7 +137,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     null,
                     "jantoth@gmail.com",
                     "",
-                    false));
+                    false,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Alex Pedersen",
@@ -137,7 +146,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                      new GregorianCalendar(1996, 6, 7).getTime(),
                     "alexpedersen@gmail.com",
                     "",
-                    false));
+                    false,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Kuba Rewald",
@@ -145,7 +155,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                      new GregorianCalendar(1999, 2, 14).getTime(),
                     "kubarewald@gmail.com",
                     "www.github.com/RebelStoke",
-                    false));
+                    false,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Radoslaw Haller",
@@ -153,7 +164,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                      new GregorianCalendar(2000, 0, 2).getTime(),
                     "radoslawhaller@gmail.com",
                     "www.github.com/darthradek",
-                    false));
+                    false,
+                    ""));
 
             friendDao.insert(new Friend(
                     "Adi Tutor",
@@ -161,7 +173,8 @@ public abstract class FriendsDatabase extends RoomDatabase {
                      new GregorianCalendar(2000, 3, 24).getTime(),
                     "aditutor@gmail.com",
                     "",
-                    false));
+                    false,
+                    ""));
 
             return null;
         }
