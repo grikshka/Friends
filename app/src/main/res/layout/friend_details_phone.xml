@@ -32,6 +32,7 @@
             android:layout_height="1dp"
             android:layout_below="@id/imgPhoneData"
             android:background="@color/colorDisabled"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp"/>
 
 </RelativeLayout>

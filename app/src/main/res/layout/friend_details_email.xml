@@ -8,8 +8,7 @@
         android:id="@+id/imgEmailData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_email_small"
-        android:layout_marginTop="24dp">
+        android:src="@drawable/ic_email_small">
 
     </ImageView>
 
@@ -18,7 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:layout_centerInParent="true"
         android:layout_toEndOf="@id/imgEmailData"
         android:layout_toRightOf="@id/imgEmailData"
         android:layout_marginLeft="16dp"
@@ -33,6 +31,7 @@
         android:layout_height="1dp"
         android:layout_below="@id/imgEmailData"
         android:background="@color/colorDisabled"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp"/>
 
 </RelativeLayout>

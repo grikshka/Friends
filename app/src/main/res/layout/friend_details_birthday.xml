@@ -8,8 +8,7 @@
         android:id="@+id/imgBirthdayData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_birthday_small"
-        android:layout_marginTop="20dp">
+        android:src="@drawable/ic_birthday_small">
 
     </ImageView>
 
@@ -18,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:gravity="center"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="2dp"
         android:layout_toEndOf="@id/imgBirthdayData"
         android:layout_toRightOf="@id/imgBirthdayData"
         android:layout_marginLeft="16dp"
