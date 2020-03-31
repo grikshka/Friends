@@ -44,25 +44,39 @@ public class FriendListActivity extends AppCompatActivity {
         recFriends = findViewById(R.id.recFriends);
     }
 
+    /*
+        In the future this code should be replaced by using
+        dagger dependency injection tool
+     */
     private void initializeViewModel()
     {
         friendsListViewModel = new ViewModelProvider(this).get(FriendsListViewModel.class);
         friendsListViewModel.initialize(getApplication());
     }
 
+    /*
+        Method for setting action bar to our own customized toolbar
+     */
     private void setUpActionBar()
     {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
+    /*
+       Method invoked when options menu gets created.
+       We want to set the menu for this activity here.
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_friends_list, menu);
         return true;
-
     }
 
+    /*
+        Method invoked after user performed some action by clicking
+        something from the action bar
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
