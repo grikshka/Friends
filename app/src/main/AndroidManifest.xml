@@ -26,9 +26,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.friends.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>
+
     </application>
 
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!--
+        Since API 18, we no logner need WRITE_EXTERNAL_STORAGE permission for saving
+        files in private internal storage. However if later on, we would like to save
+        them in public storage, this restriction should be removed.
+    -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+
+    <!--
+        This permissions are not needed, since we are using other applications for
+        making calls, sending messages and opening websites. However I will leave it here
+        if we would like to perform this actions from our app later on
+    -->
+    <!--    <uses-permission android:name="android.permission.SEND_SMS"/>-->
+    <!--    <uses-permission android:name="android.permission.CALL_PHONE"/>-->
+    <!--    <uses-permission android:name="android.permission.INTERNET" />-->
 </manifest>
