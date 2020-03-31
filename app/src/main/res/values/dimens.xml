@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="profile_picture_width">90dp</dimen>
+    <dimen name="profile_picture_height">90dp</dimen>
+    <dimen name="profile_picture_width_list">50dp</dimen>
+    <dimen name="profile_picture_height_list">50dp</dimen>
+</resources>
