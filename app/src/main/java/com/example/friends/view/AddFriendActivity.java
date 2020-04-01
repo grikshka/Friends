@@ -14,10 +14,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,17 +32,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.friends.R;
 import com.example.friends.entity.Friend;
+import com.example.friends.view.util.BitmapResolver;
+import com.example.friends.view.util.ImageFileHandler;
 import com.example.friends.viewmodel.AddFriendViewModel;
 import com.google.android.material.button.MaterialButton;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -277,9 +272,9 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
 
             /*
                 Writing permission is not required anymore for writing and reading private
-                internal storage since API 18. I will leave this code if in future I would like
-                to store images in public storage instead. If this will happen remember to delete
-                maxSdkVersion paramether for writing permission in manifest file and update
+                external storage since API 18. I will leave this code if in future I would like
+                to store images in public external storage instead. If this will happen remember to delete
+                maxSdkVersion parameter for writing permission in manifest file and update
                 onRequestPermissionResult to check for both of these permissions
             */
 
@@ -312,11 +307,11 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
             try
             {
                 /*
-                    Creates image file in private storage area that will
+                    Creates temporary image file in private external storage area that will
                     be passed to camera intent to saved photo to the specified
                     file.
                  */
-                photoFile = createImageFilePrivateStorage();
+                photoFile = ImageFileHandler.createTempImageFilePrivateStorage(this);
             }
             catch (IOException ex)
             {
@@ -332,21 +327,6 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
             }
         }
 
-    }
-
-    /*
-        Creates image file, that is located inside private internal storage.
-     */
-    private File createImageFilePrivateStorage() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "IMG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-        return image;
     }
 
     /*
@@ -506,46 +486,6 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
     }
 
     /*
-        Method for getting real path from URI. This method should be refactored since
-        MediaStore.Video.Media.DATA is deprecated. This method is not going to work
-        on all android versions and should be improved in the future.
-     */
-    private String getRealPathFromURI(Uri contentUri)
-    {
-        String[] proj = { MediaStore.Video.Media.DATA };
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
-
-    /*
-        Method used for saving image from given path to private internal storage.
-     */
-    public String saveImageToPrivateStorage(String pathToImage)
-    {
-        try
-        {
-            Bitmap bitmap = BitmapFactory.decodeFile(pathToImage);
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-
-            File file = createImageFilePrivateStorage();
-            file.createNewFile();
-            FileOutputStream fo = new FileOutputStream(file);
-            fo.write(bytes.toByteArray());
-            fo.close();
-
-            return file.getAbsolutePath();
-        }
-        catch(IOException e)
-        {
-            Log.e(TAG, "Error occured while saving image to private storage");
-            return null;
-        }
-    }
-
-    /*
         Method invoked after user performed some action by clicking
         something from the action bar
      */
@@ -583,8 +523,8 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
             {
                 /*
                     This method should be changed if we decide to store images in public
-                    internal storage later on. Then we have to check for both Camera permission
-                    and write internal storage permission
+                     external storage later on. Then we have to check for both Camera permission
+                    and write external storage permission
                  */
                 if(grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED)
@@ -628,15 +568,13 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
             {
                 if(resultCode == Activity.RESULT_OK)
                 {
-                    Uri imageUri = data.getData();
-                    String imagePath = getRealPathFromURI(imageUri);
-
                     /*
                         In case user will delete image from gallery, we want to
-                        copy it to private internal storage and use this copy in
+                        copy it to private external storage and use this copy in
                         app to avoid this problem
                      */
-                    String imagePathPrivateStorage = saveImageToPrivateStorage(imagePath);
+                    Uri imageUri = data.getData();
+                    String imagePathPrivateStorage = ImageFileHandler.saveImageToPrivateStorage(this, imageUri);
                     profilePicturePath = imagePathPrivateStorage;
                     setProfilePicture(profilePicturePath);
                     break;
