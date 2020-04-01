@@ -452,7 +452,7 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         }
         catch(ParseException e)
         {
-            Log.e(TAG, "Error occured while parsing the date");
+            Log.e(TAG, "Error occurred while parsing the date");
             return null;
         }
     }
@@ -557,7 +557,7 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
                 {
                     /*
                         Here we are getting the cameraImagePath which camera intent
-                        used to save photo taken by user.
+                        used to save photo taken by user into private storage.
                      */
                     profilePicturePath = cameraImagePath;
                     setProfilePicture(profilePicturePath);
@@ -574,8 +574,8 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
                         app to avoid this problem
                      */
                     Uri imageUri = data.getData();
-                    String imagePathPrivateStorage = ImageFileHandler.saveImageToPrivateStorage(this, imageUri);
-                    profilePicturePath = imagePathPrivateStorage;
+                    Bitmap bitmap = BitmapResolver.getBitmap(getContentResolver(), imageUri);
+                    profilePicturePath = ImageFileHandler.saveImageToPrivateStorage(this, bitmap);
                     setProfilePicture(profilePicturePath);
                     break;
                 }

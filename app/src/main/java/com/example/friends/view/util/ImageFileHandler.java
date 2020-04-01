@@ -1,18 +1,24 @@
 package com.example.friends.view.util;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class ImageFileHandler {
 
@@ -37,11 +43,10 @@ public class ImageFileHandler {
     /*
         Method used for saving image from given path to private external storage.
      */
-    public static String saveImageToPrivateStorage(Context context, Uri imageUri)
+    public static String saveImageToPrivateStorage(Context context, Bitmap bitmap)
     {
         try
         {
-            Bitmap bitmap = BitmapResolver.getBitmap(context.getContentResolver(), imageUri);
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
 
@@ -55,7 +60,7 @@ public class ImageFileHandler {
         }
         catch(IOException e)
         {
-            Log.e(TAG, "Error occured while saving image to private storage");
+            Log.e(TAG, "Error occurred while saving image to private storage");
             return null;
         }
     }
