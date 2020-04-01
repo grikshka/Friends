@@ -49,7 +49,7 @@ public class BitmapResolver {
         }
         catch (IOException e)
         {
-            Log.e(TAG, "Error occured while creating bitmap from URI using Legacy library");
+            Log.e(TAG, "Error occurred while creating bitmap from URI using Legacy library");
         }
 
         return bitmap;
@@ -68,9 +68,8 @@ public class BitmapResolver {
         }
         catch (IOException e)
         {
-            Log.e(TAG, "Error occured while creating bitmap from URI using ImageDecoder");
+            Log.e(TAG, "Error occurred while creating bitmap from URI using ImageDecoder");
         }
-
         return bitmap;
     }
 }
