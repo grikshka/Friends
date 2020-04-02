@@ -123,7 +123,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
         private void startFriendDetailsActivity(View v)
         {
             Intent intent = new Intent(v.getContext(), FriendDetailsActivity.class);
-            intent.putExtra("EXTRA_FRIEND_ID", friend.getId());
+            intent.putExtra(FriendDetailsActivity.EXTRA_FRIEND_ID, friend.getId());
             v.getContext().startActivity(intent);
         }
     }

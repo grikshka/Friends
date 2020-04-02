@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 
 public class FriendDetailsActivity extends AppCompatActivity {
 
+    public static final String EXTRA_FRIEND_ID = "EXTRA_FRIEND_ID";
     public static final String DATE_PATTERN = "dd/MM/yyyy";
 
     /*
@@ -63,7 +64,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_details);
-        int friendId = getIntent().getIntExtra("EXTRA_FRIEND_ID", 0);
+        int friendId = getIntent().getIntExtra(EXTRA_FRIEND_ID, 0);
 
         initializeViews();
         setUpActionBar();
