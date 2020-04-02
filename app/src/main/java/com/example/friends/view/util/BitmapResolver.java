@@ -19,7 +19,7 @@ public class BitmapResolver {
 
     /*
         Method used for returning bitmap from image Uri. It uses ImageDecoder for APIs 28
-        and higher and legacy solutions for lower APIs that does not support this solution.
+        and higher and legacy solutions for lower APIs that does not support ImageDecoder.
      */
     public static Bitmap getBitmap(@NonNull ContentResolver contentResolver, Uri imageUri) {
         if (imageUri == null)

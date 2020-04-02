@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -18,7 +17,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,9 +35,6 @@ import com.example.friends.view.util.ImageFileHandler;
 import com.example.friends.viewmodel.AddFriendViewModel;
 import com.google.android.material.button.MaterialButton;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -93,16 +88,17 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
     /*
         Path to currently visible profile picture,
         either selected from gallery or taken using
-        camera
+        camera. Used to send along with the other
+        friends data on save.
      */
     private String profilePicturePath;
 
     /*
-        Path to image file that is used by camera to save
+        Uri to image file that is used by camera to save
         image taken by the user. It is used in onActivityResult
-        to set ImageVIew with profile picture
+        to set ImageView and add image to public external storage
      */
-    private String cameraImagePath;
+    private Uri cameraImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -259,6 +255,13 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         Checks for required permission for taking photo using camera.
         If all of the permissions are granted, invokes the takePhoto method.
         If not, asks for required permissions.
+
+        Writing permission is not required anymore for writing and reading private
+        external storage since API 18. However after taking a photo and saving it
+        to private external storage by camera, we will also copy image and save it
+        to public external storage to make it visible for user in gallery. This will
+        be done just for better UX, since we will still use image from private storage
+        across application for better protection over deleting images from gallery.
      */
     private void takePhotoCheckPermission()
     {
@@ -269,23 +272,12 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
             {
                 permissions.add(Manifest.permission.CAMERA);
             }
-
-            /*
-                Writing permission is not required anymore for writing and reading private
-                external storage since API 18. I will leave this code if in future I would like
-                to store images in public external storage instead. If this will happen remember to delete
-                maxSdkVersion parameter for writing permission in manifest file and update
-                onRequestPermissionResult to check for both of these permissions
-            */
-
-//            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-//            {
-//                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//            }
-
+            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            {
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
             if(permissions.size() > 0)
             {
-                System.out.println(permissions.size());
                 requestPermissions(permissions.toArray(new String[permissions.size()]), CAMERA_REQUEST);
             }
             else
@@ -297,32 +289,27 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
 
     /*
         Starts activity for taking picture using camera.
+
+        Uses ImageFileHandler to create image file object in public external storage
+        area that will be passed to camera intent to save photo to the specified file.
      */
     private void takePhoto()
     {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) != null)
         {
-            File photoFile = null;
+            Uri publicImageUri = null;
             try
             {
-                /*
-                    Creates temporary image file in private external storage area that will
-                    be passed to camera intent to saved photo to the specified
-                    file.
-                 */
-                photoFile = ImageFileHandler.createTempImageFilePrivateStorage(this);
+                publicImageUri = ImageFileHandler.createImageFilePublic(this);
             }
             catch (IOException ex)
             {
                 Log.e(TAG, "Error occurred while creating the File");
             }
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.friends.fileprovider",
-                        photoFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                cameraImagePath = photoFile.getAbsolutePath();
+            if (publicImageUri != null) {
+                cameraImageUri = publicImageUri;
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraImageUri);
                 startActivityForResult(intent, CAMERA_REQUEST);
             }
         }
@@ -474,9 +461,9 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
     }
 
     /*
-        Using Glide library for setting the profile picture to benefit
-        from image caching and simplifying complex task of setting bitmap
-        to achieve smooth behaviour and fast decoding
+        Using Glide library for setting the profile picture from image path
+         to benefit from image caching and simplifying complex task of setting
+         bitmap to achieve smooth behaviour and fast decoding
      */
     private void setProfilePicture(String pathToImage)
     {
@@ -521,14 +508,15 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
         {
             case CAMERA_REQUEST:
             {
-                /*
-                    This method should be changed if we decide to store images in public
-                     external storage later on. Then we have to check for both Camera permission
-                    and write external storage permission
-                 */
-                if(grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                if(grantResults.length > 0)
                 {
+                    for(int i = 0; i < grantResults.length; i++)
+                    {
+                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED)
+                        {
+                            return;
+                        }
+                    }
                     takePhoto();
                 }
                 break;
@@ -557,9 +545,15 @@ public class AddFriendActivity extends AppCompatActivity implements DatePickerDi
                 {
                     /*
                         Here we are getting the cameraImagePath which camera intent
-                        used to save photo taken by user into private storage.
+                        used to save photo taken by user into public storage.
+
+                        In case user will delete image from gallery, we want to
+                        copy it to private external storage and use this copy in
+                        app to avoid this problem
                      */
-                    profilePicturePath = cameraImagePath;
+                    Uri imageUri = cameraImageUri;
+                    Bitmap bitmap = BitmapResolver.getBitmap(getContentResolver(), imageUri);
+                    profilePicturePath = ImageFileHandler.saveImageToPrivateStorage(this, bitmap);
                     setProfilePicture(profilePicturePath);
                     break;
                 }

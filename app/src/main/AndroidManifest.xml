@@ -3,7 +3,6 @@
     package="com.example.friends">
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,17 +27,6 @@
             </intent-filter>
         </activity>
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.friends.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
-        </provider>
-
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -46,11 +34,10 @@
 
     <!--
         Since API 18, we no longer need WRITE_EXTERNAL_STORAGE permission for saving
-        files in private internal storage. However if later on, we would like to save
-        them in public storage, this restriction should be removed.
+        files in private internal storage. However we need this permission to save
+        them in public storage.
     -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
 
     <!--
