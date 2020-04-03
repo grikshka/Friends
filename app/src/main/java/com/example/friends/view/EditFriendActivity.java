@@ -1,5 +1,6 @@
 package com.example.friends.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -161,5 +162,26 @@ public class EditFriendActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
         }
+    }
+
+    /*
+        Note - we do not have to save other values, since simple elements
+        like EditView or TextView are automatically restored if you give them
+        an id.
+    */
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("picturePath", fragmentPicture.getProfilePicturePath());
+        outState.putBoolean("isFavorite", fragmentData.getFavorite());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String picturePath = outState.getString("picturePath");
+        boolean isFavorite = outState.getBoolean("isFavorite");
+        fragmentPicture.setProfilePicture(picturePath);
+        fragmentData.setFavorite(isFavorite);
     }
 }

@@ -206,10 +206,12 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
         if(favorite)
         {
             imgFavorite.setImageResource(R.drawable.ic_favorite_true);
+            imgFavorite.setTag(R.drawable.ic_favorite_true);
         }
         else
         {
             imgFavorite.setImageResource(R.drawable.ic_favorite_false);
+            imgFavorite.setTag(R.drawable.ic_favorite_false);
         }
     }
 
