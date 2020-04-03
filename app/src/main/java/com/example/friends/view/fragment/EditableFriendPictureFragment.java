@@ -249,11 +249,15 @@ public class EditableFriendPictureFragment extends Fragment {
          to benefit from image caching and simplifying complex task of setting
          bitmap to achieve smooth behaviour and fast decoding
      */
-    private void setProfilePicture(String pathToImage)
+    public void setProfilePicture(String pathToImage)
     {
-        Glide.with(this)
-                .load(pathToImage)
-                .into(imgProfilePicture);
+        if(pathToImage != null && !pathToImage.isEmpty())
+        {
+            profilePicturePath = pathToImage;
+            Glide.with(this)
+                    .load(pathToImage)
+                    .into(imgProfilePicture);
+        }
     }
 
     public String getProfilePicturePath()
@@ -309,8 +313,8 @@ public class EditableFriendPictureFragment extends Fragment {
                      */
                     Uri imageUri = cameraImageUri;
                     Bitmap bitmap = BitmapResolver.getBitmap(getContext().getContentResolver(), imageUri);
-                    profilePicturePath = ImageFileHandler.saveImageToPrivateStorage(getContext(), bitmap);
-                    setProfilePicture(profilePicturePath);
+                    String pathToImage = ImageFileHandler.saveImageToPrivateStorage(getContext(), bitmap);
+                    setProfilePicture(pathToImage);
                     break;
                 }
             }
@@ -323,8 +327,8 @@ public class EditableFriendPictureFragment extends Fragment {
                      */
                     Uri imageUri = data.getData();
                     Bitmap bitmap = BitmapResolver.getBitmap(getContext().getContentResolver(), imageUri);
-                    profilePicturePath = ImageFileHandler.saveImageToPrivateStorage(getContext(), bitmap);
-                    setProfilePicture(profilePicturePath);
+                    String pathToImage = ImageFileHandler.saveImageToPrivateStorage(getContext(), bitmap);
+                    setProfilePicture(pathToImage);
                     break;
                 }
             }

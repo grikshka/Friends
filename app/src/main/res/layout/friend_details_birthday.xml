@@ -26,4 +26,13 @@
         android:textColor="@color/colorPrimaryDark">
     </TextView>
 
+    <View
+        android:id="@+id/lineWebsiteDataSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/imgBirthdayData"
+        android:background="@color/colorDisabled"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp"/>
+
 </RelativeLayout>

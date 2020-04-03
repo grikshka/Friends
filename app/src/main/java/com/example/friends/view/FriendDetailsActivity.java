@@ -56,7 +56,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_details);
-        int friendId = getIntent().getIntExtra(EXTRA_FRIEND_ID, 0);
+        int friendId = getIntent().getIntExtra(EXTRA_FRIEND_ID, -1);
 
         initializeViews();
         setUpActionBar();
@@ -432,7 +432,10 @@ public class FriendDetailsActivity extends AppCompatActivity {
 
     private void startEditFriendActivity()
     {
-
+        Intent intent = new Intent(this, EditFriendActivity.class);
+        intent.putExtra(EditFriendActivity.EXTRA_EDITED_FRIEND,
+                friendDetailsViewModel.getFriend().getValue());
+        startActivity(intent);
     }
 
     private void openDeleteFriendDialog()

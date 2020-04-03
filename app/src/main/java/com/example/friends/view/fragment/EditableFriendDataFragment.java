@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.friends.R;
+import com.example.friends.entity.Friend;
 import com.google.android.material.button.MaterialButton;
 
 import java.text.ParseException;
@@ -95,6 +96,31 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
         });
     }
 
+    public void setFriendData(Friend friend)
+    {
+        if(friend.getName() != null)
+        {
+            etName.setText(friend.getName());
+        }
+        if(friend.getPhone() != null)
+        {
+            etPhone.setText(friend.getPhone());
+        }
+        if(friend.getBirthday() != null)
+        {
+            btnBirthday.setText(dateFormatter.format(friend.getBirthday()));
+        }
+        if(friend.getEmail() != null)
+        {
+            etEmail.setText(friend.getEmail());
+        }
+        if(friend.getWebsite() != null)
+        {
+            etWebsite.setText(friend.getWebsite());
+        }
+        setFavorite(friend.isFavorite());
+    }
+
     /*
         Method invoked after users clicks on imgFavorite.
         Switches favorite state from favorite true to favorite false
@@ -172,6 +198,18 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
         else
         {
             return false;
+        }
+    }
+
+    public void setFavorite(boolean favorite)
+    {
+        if(favorite)
+        {
+            imgFavorite.setImageResource(R.drawable.ic_favorite_true);
+        }
+        else
+        {
+            imgFavorite.setImageResource(R.drawable.ic_favorite_false);
         }
     }
 

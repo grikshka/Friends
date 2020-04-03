@@ -35,7 +35,7 @@ public class AddFriendActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_friend);
+        setContentView(R.layout.activity_editable_friend);
 
         initializeViews();
         initializeViewModel();
@@ -49,6 +49,16 @@ public class AddFriendActivity extends AppCompatActivity {
         fragmentPicture = (EditableFriendPictureFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentProfilePicture);
         fragmentData = (EditableFriendDataFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentData);
         btnSave = findViewById(R.id.btnSave);
+    }
+
+    /*
+        In the future this code should be replaced by using
+        dagger dependency injection tool
+     */
+    private void initializeViewModel()
+    {
+        addFriendViewModel = new ViewModelProvider(this).get(AddFriendViewModel.class);
+        addFriendViewModel.initialize(getApplication());
     }
 
     /*
@@ -66,16 +76,6 @@ public class AddFriendActivity extends AppCompatActivity {
     private void initializeDefaultValues()
     {
         btnSave.setEnabled(false);
-    }
-
-    /*
-        In the future this code should be replaced by using
-        dagger dependency injection tool
-     */
-    private void initializeViewModel()
-    {
-        addFriendViewModel = new ViewModelProvider(this).get(AddFriendViewModel.class);
-        addFriendViewModel.initialize(getApplication());
     }
 
     private void initalizeListeners()
