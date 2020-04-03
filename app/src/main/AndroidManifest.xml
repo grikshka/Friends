@@ -39,13 +39,4 @@
     -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
-
-    <!--
-        This permissions are not needed, since we are using other applications for
-        making calls, sending messages and opening websites. However I will leave it here
-        if we would like to perform this actions from our app later on
-    -->
-    <!--    <uses-permission android:name="android.permission.SEND_SMS"/>-->
-    <!--    <uses-permission android:name="android.permission.CALL_PHONE"/>-->
-    <!--    <uses-permission android:name="android.permission.INTERNET" />-->
 </manifest>

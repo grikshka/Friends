@@ -2,6 +2,7 @@ package com.example.friends.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -9,12 +10,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,17 +36,6 @@ public class FriendDetailsActivity extends AppCompatActivity {
 
     public static final String EXTRA_FRIEND_ID = "EXTRA_FRIEND_ID";
     public static final String DATE_PATTERN = "dd/MM/yyyy";
-
-    /*
-        We do not need these constants right now, since we are using
-        external applications for performing these actions.
-
-        Might be used later if we would like to implement our own funtionality
-        for these actions and need to request permission for them
-     */
-//    public static final int REQUEST_CALL_PHONE = 1;
-//    public static final int REQUEST_SEND_SMS = 2;
-//    public static final int REQUEST_INTERNET = 3;
 
     private TextView tvName;
     private ImageView imgProfilePicture;
@@ -99,6 +91,16 @@ public class FriendDetailsActivity extends AppCompatActivity {
     }
 
     /*
+       Method invoked when options menu gets created.
+       We want to set the menu for this activity here.
+    */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_friend_details, menu);
+        return true;
+    }
+
+    /*
         Method invoked after user performed some action by clicking
         something from the action bar
      */
@@ -109,6 +111,16 @@ public class FriendDetailsActivity extends AppCompatActivity {
             case android.R.id.home:
             {
                 finish();
+                return true;
+            }
+            case R.id.action_edit:
+            {
+                startEditFriendActivity();
+                return true;
+            }
+            case R.id.action_delete:
+            {
+                openDeleteFriendDialog();
                 return true;
             }
             default:
@@ -129,9 +141,12 @@ public class FriendDetailsActivity extends AppCompatActivity {
         friendDetailsViewModel.getFriend().observe(this, new Observer<Friend>() {
             @Override
             public void onChanged(Friend friend) {
-                updateProfileViews(friend);
-                updateActionViews(friend);
-                updateDataViews(friend);
+                if(friend != null)
+                {
+                    updateProfileViews(friend);
+                    updateActionViews(friend);
+                    updateDataViews(friend);
+                }
             }
         });
     }
@@ -391,7 +406,10 @@ public class FriendDetailsActivity extends AppCompatActivity {
 
     /*
        Starts activity for opening a browser with friends website.
-       Opening external browser does not need any permissions
+       Opening external browser does not need any permissions.
+
+       Also since last Google Play update, Google removed the need to
+       ask permission for the internet at all.
     */
     private void openBrowserActivity()
     {
@@ -412,122 +430,58 @@ public class FriendDetailsActivity extends AppCompatActivity {
         }
     }
 
-    /*
-        Checks for required permission for making a call.
-        If all of the permissions are granted, this method will make a call,
-        if not, asks for required permissions.
+    private void startEditFriendActivity()
+    {
 
-        This method is not used right now, since we are not making call directly from our
-        app. However I will leave it, if later we would like to do this.
-     */
-//    private void makeCallCheckPermission()
-//    {
-//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1)
-//        {
-//            if(checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
-//            {
-//                //MAKE CALL
-//            }
-//            else
-//            {
-//                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE);
-//            }
-//        }
-//    }
+    }
 
+    private void openDeleteFriendDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        builder.setMessage("Are you sure you want to delete " +
+                friendDetailsViewModel.getFriend().getValue().getName() +
+                " from your Friends?");
 
-    /*
-        Checks for required permission for sending a message. This permission
-        is only required if we want to send a message from our application. It is
-        not required for opening different app for sending a message
-        If all of the permissions are granted, invokes the sendMessage method.
-        If not, asks for required permissions.
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                friendDetailsViewModel.deleteFriend();
+                finish();
+            }
+        });
 
-        This method is not used right now, since we are not sending messages directly from our
-        app. However I will leave it, if later we would like to do this.
-     */
-//    private void sendMessageCheckPermission()
-//    {
-//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1)
-//        {
-//            if(checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
-//            {
-//                //SEND MESSAGE FROM THIS APP
-//            }
-//            else
-//            {
-//                requestPermissions(new String[]{Manifest.permission.SEND_SMS}, REQUEST_SEND_SMS);
-//            }
-//        }
-//    }
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
+        AlertDialog alert = builder.create();
+        setDialogStyle(alert);
+        alert.show();
+    }
 
     /*
-        Checks for required permission for opening a website.
-        If all of the permissions are granted, this method should start
-        activity for opening website inside application, if not, asks for
-        required permissions.
+            Set dialog buttons style. Since we don't wanna customize the whole dialog,
+            this is the simplest way of achieving small visual changes. This could anyways
+            should be removed from here and we should create style for the dialog in res
+            folder
+         */
+    private void setDialogStyle(final AlertDialog alert)
+    {
+        alert.setOnShowListener( new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(
+                        ContextCompat.getColor(FriendDetailsActivity.this, R.color.colorPrimary));
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundColor(
+                        ContextCompat.getColor(FriendDetailsActivity.this, R.color.colorPrimaryLight));
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                        ContextCompat.getColor(FriendDetailsActivity.this, R.color.colorPrimary));
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(
+                        ContextCompat.getColor(FriendDetailsActivity.this, R.color.colorPrimaryLight));
+            }
+        });
+    }
 
-        This method is not used right now, since we are not opening a website directly in our
-        app. However I will leave it, if later we would like to do this.
-     */
-//    private void openWebsiteCheckPermission()
-//    {
-//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1)
-//        {
-//            if(checkSelfPermission(Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)
-//            {
-//                //OPEN WEBSITE IN THIS APP
-//            }
-//            else
-//            {
-//                requestPermissions(new String[]{Manifest.permission.INTERNET}, REQUEST_INTERNET);
-//            }
-//        }
-//    }
-
-
-    /*
-        This method will never be invoked in current set up.
-        Since we are using external applications for sending message,
-        opening website, and opening dial we dont need any permissions.
-
-        However I will leave this code if later on we would like to perform
-        this actions from our applications instead of depending on other apps.
-     */
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-//    {
-//        switch(requestCode)
-//        {
-//            case REQUEST_CALL_PHONE:
-//            {
-//                if(grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-//                {
-//                    //MAKE A PHONE CALL
-//                }
-//                break;
-//            }
-//            case REQUEST_SEND_SMS:
-//            {
-//                if (grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-//                {
-//                    //SEND MESSAGE FROM APP
-//                }
-//                break;
-//            }
-//            case REQUEST_INTERNET:
-//            {
-//                if (grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-//                {
-//                   //OPEN WEBSITE INSIDE APP
-//                }
-//                break;
-//            }
-//
-//        }
-//    }
 }

@@ -7,6 +7,7 @@
     android:background="@android:color/white"
     app:titleTextColor="@color/colorPrimary"
     app:contentInsetStartWithNavigation="0dp"
-    app:titleTextAppearance="@style/Toolbar.TitleText">
+    app:titleTextAppearance="@style/Toolbar.TitleText"
+    app:theme="@style/Toolbar.ToolbarStyle">
 
 </androidx.appcompat.widget.Toolbar>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar"
         xmlns:tools="http://schemas.android.com/tools">
@@ -16,6 +16,14 @@
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Toolbar.ToolbarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
     <style name="autoscroll">

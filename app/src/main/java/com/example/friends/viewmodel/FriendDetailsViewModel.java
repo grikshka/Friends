@@ -26,4 +26,9 @@ public class FriendDetailsViewModel extends ViewModel {
     {
         return friend;
     }
+
+    public void deleteFriend()
+    {
+        repository.delete(friend.getValue());
+    }
 }
