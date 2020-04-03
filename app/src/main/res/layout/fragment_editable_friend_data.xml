@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint="@string/name"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="8dp"
             >
 
@@ -55,6 +56,7 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:hint="@string/phone"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="8dp">
 
         </EditText>
@@ -115,6 +117,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:hint="@string/email"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="8dp">
 
         </EditText>
@@ -143,6 +146,7 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:hint="@string/website"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="8dp">
 
         </EditText>
