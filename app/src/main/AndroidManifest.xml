@@ -2,6 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.friends">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--
+        Since API 18, we no longer need WRITE_EXTERNAL_STORAGE permission for saving
+        files in private internal storage. However we need this permission to save
+        them in public storage.
+    -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,34 +22,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity
-            android:name=".view.FriendDetailsActivity">
-        </activity>
-
-        <activity
-            android:name=".view.AddFriendActivity">
-        </activity>
-
-        <activity
-            android:name=".view.FriendListActivity">
+        <activity android:name=".view.util.EditFriendActivity"></activity>
+        <activity android:name=".view.FriendDetailsActivity"></activity>
+        <activity android:name=".view.AddFriendActivity"></activity>
+        <activity android:name=".view.FriendListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-    <!--
-        Since API 18, we no longer need WRITE_EXTERNAL_STORAGE permission for saving
-        files in private internal storage. However we need this permission to save
-        them in public storage.
-    -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-feature android:name="android.hardware.camera" android:required="false"/>
 </manifest>
