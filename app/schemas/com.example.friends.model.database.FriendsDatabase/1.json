@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "84698e71305ab82ddf96ce67b765113d",
+    "identityHash": "680419a63f19776e7fa935489b1b2b7a",
     "entities": [
       {
         "tableName": "Friend",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `phone` TEXT, `birthday` INTEGER, `email` TEXT, `website` TEXT, `favorite` INTEGER NOT NULL, `picturePath` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `phone` TEXT, `birthday` INTEGER, `email` TEXT, `address` TEXT, `website` TEXT, `favorite` INTEGER NOT NULL, `picturePath` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -35,6 +35,12 @@
           {
             "fieldPath": "email",
             "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -70,7 +76,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '84698e71305ab82ddf96ce67b765113d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '680419a63f19776e7fa935489b1b2b7a')"
     ]
   }
 }

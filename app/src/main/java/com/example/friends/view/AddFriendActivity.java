@@ -135,11 +135,12 @@ public class AddFriendActivity extends AppCompatActivity {
         String phone = fragmentData.getPhone();
         Date birthday = fragmentData.getBirthday();
         String email = fragmentData.getEmail();
+        String address = fragmentData.getAddress();
         String website = fragmentData.getWebsite();
         String picturePath = fragmentPicture.getProfilePicturePath();
         boolean favorite = fragmentData.getFavorite();
 
-        Friend friend = new Friend(name, phone, birthday, email, website, favorite, picturePath);
+        Friend friend = new Friend(name, phone, birthday, email, address, website, favorite, picturePath);
         addFriendViewModel.insertFriend(friend);
         finish();
     }

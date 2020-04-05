@@ -68,6 +68,7 @@ public class EditFriendActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
+        setTitle("Friends Details");
     }
 
     /*
@@ -136,6 +137,7 @@ public class EditFriendActivity extends AppCompatActivity {
         editedFriend.setPhone(fragmentData.getPhone());
         editedFriend.setBirthday(fragmentData.getBirthday());
         editedFriend.setEmail(fragmentData.getEmail());
+        editedFriend.setAddress(fragmentData.getAddress());
         editedFriend.setWebsite(fragmentData.getWebsite());
         editedFriend.setPicturePath(fragmentPicture.getProfilePicturePath());
         editedFriend.setFavorite(fragmentData.getFavorite());

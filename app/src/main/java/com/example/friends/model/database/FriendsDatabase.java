@@ -64,6 +64,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+48 502 288 995",
                      new GregorianCalendar(1998, 8, 16).getTime(),
                     "schemabuoi@gmail.com",
+                    "Popowicka 146/27 Wroclaw",
                     "www.schemabuoi.github.io/grzegorz-charyszczak/",
                     true,
                     ""));
@@ -73,6 +74,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+48 690 421 069",
                      new GregorianCalendar(2000, 5, 24).getTime(),
                     "oliwiaskrzypaszek@gmail.com",
+                    "Piotra Stachiewicza 15/20 Krakow",
                     "www.skrzypaszek.pl",
                     true,
                     ""));
@@ -82,6 +84,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+48 607 412 984",
                     new GregorianCalendar(1998, 4, 24).getTime(),
                     "mdwornikowski@gmail.com",
+                    "",
                     "www.mdwornikowski.com/",
                     true,
                     ""));
@@ -92,6 +95,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     new GregorianCalendar(1998, 3, 24).getTime(),
                     "igamolendowska@gmail.com",
                     "",
+                    "",
                     true,
                     ""));
 
@@ -100,6 +104,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+45 81 90 84 96",
                     null,
                     "davidkalatzis@gmail.com",
+                    "",
                     "www.kidagine.github.io/davidkalatzis/",
                     true,
                     ""));
@@ -110,6 +115,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     new GregorianCalendar(1997, 3, 24).getTime(),
                     "matekiss@gmail.com",
                     "",
+                    "",
                     false,
                     ""));
 
@@ -118,6 +124,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+45 16 78 34 72",
                     null,
                     "nedassurkus@gmail.com",
+                    "",
                     "",
                     false,
                     ""));
@@ -128,6 +135,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     null,
                     "marekstancik@gmail.com",
                     "",
+                    "",
                     false,
                     ""));
 
@@ -136,6 +144,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+45 66 40 15 91",
                     null,
                     "jantoth@gmail.com",
+                    "",
                     "",
                     false,
                     ""));
@@ -146,6 +155,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                      new GregorianCalendar(1996, 6, 7).getTime(),
                     "alexpedersen@gmail.com",
                     "",
+                    "",
                     false,
                     ""));
 
@@ -154,6 +164,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+45 72 21 14 15",
                      new GregorianCalendar(1999, 2, 14).getTime(),
                     "kubarewald@gmail.com",
+                    "",
                     "www.github.com/RebelStoke",
                     false,
                     ""));
@@ -163,6 +174,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+45 40 20 76 91",
                      new GregorianCalendar(2000, 0, 2).getTime(),
                     "radoslawhaller@gmail.com",
+                    "",
                     "www.github.com/darthradek",
                     false,
                     ""));
@@ -172,6 +184,7 @@ public abstract class FriendsDatabase extends RoomDatabase {
                     "+45 59 91 15 20",
                      new GregorianCalendar(2000, 3, 24).getTime(),
                     "aditutor@gmail.com",
+                    "",
                     "",
                     false,
                     ""));

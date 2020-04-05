@@ -89,6 +89,15 @@
                 android:src="@drawable/ic_website_active">
 
             </ImageView>
+
+            <ImageView
+                android:id="@+id/imgAddress"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_address_active">
+
+            </ImageView>
         </LinearLayout>
 
         <LinearLayout
@@ -152,6 +161,21 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/visit"
+                android:textColor="@color/colorPrimary"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                style="@style/autoscroll">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/location"
                 android:textColor="@color/colorPrimary"
                 android:textSize="11sp"
                 android:maxLines="1"

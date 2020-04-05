@@ -43,10 +43,12 @@ public class FriendDetailsActivity extends AppCompatActivity {
     private ImageView imgMessage;
     private ImageView imgEmail;
     private ImageView imgWebsite;
+    private ImageView imgAddress;
     private TextView tvPhone;
     private TextView tvMessage;
     private TextView tvEmail;
     private TextView tvWebsite;
+    private TextView tvAddress;
     private LinearLayout linFriendDataContainer;
 
     private FriendDetailsViewModel friendDetailsViewModel;
@@ -71,10 +73,12 @@ public class FriendDetailsActivity extends AppCompatActivity {
         imgMessage = findViewById(R.id.imgMessage);
         imgEmail = findViewById(R.id.imgEmail);
         imgWebsite = findViewById(R.id.imgWebsite);
+        imgAddress = findViewById(R.id.imgAddress);
         tvPhone = findViewById(R.id.tvPhone);
         tvMessage = findViewById(R.id.tvMessage);
         tvEmail = findViewById(R.id.tvEmail);
         tvWebsite = findViewById(R.id.tvWebsite);
+        tvAddress = findViewById(R.id.tvAddress);
         linFriendDataContainer = findViewById(R.id.linFriendDataContainer);
     }
 
@@ -190,6 +194,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
         updatePhoneMessageActionView(friend);
         updateEmailActionView(friend);
         updateWebsiteActionView(friend);
+        updateAddressActionView(friend);
     }
 
     private void updatePhoneMessageActionView(Friend friend)
@@ -248,6 +253,27 @@ public class FriendDetailsActivity extends AppCompatActivity {
         }
     }
 
+    private void updateAddressActionView(Friend friend)
+    {
+        if(friend.getAddress() == null || friend.getAddress().isEmpty())
+        {
+            imgAddress.setImageResource(R.drawable.ic_address_disabled);
+            imgAddress.setOnClickListener(null);
+            tvAddress.setTextColor(ContextCompat.getColor(this, R.color.colorDisabled));
+        }
+        else
+        {
+            imgAddress.setImageResource(R.drawable.ic_address_active);
+            imgAddress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openFriendsMapAcivity();
+                }
+            });
+            tvAddress.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        }
+    }
+
     private void updateWebsiteActionView(Friend friend)
     {
         if(friend.getWebsite() == null || friend.getWebsite().isEmpty())
@@ -279,6 +305,7 @@ public class FriendDetailsActivity extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         updatePhoneDataView(friend, inflater);
         updateEmailDataView(friend, inflater);
+        updateAddressDataView(friend, inflater);
         updateWebsiteDataView(friend, inflater);
         updateBirthdayDataView(friend, inflater);
     }
@@ -324,6 +351,28 @@ public class FriendDetailsActivity extends AppCompatActivity {
                 && !(relEmailDataContainer == null))
         {
             linFriendDataContainer.removeView(relEmailDataContainer);
+        }
+    }
+
+    private void updateAddressDataView(Friend friend, LayoutInflater inflater)
+    {
+        RelativeLayout relAddressDataContainer = findViewById(R.id.relAddressDataContainer);
+        if(!(friend.getAddress() == null)
+                && !friend.getAddress().isEmpty()
+                && relAddressDataContainer == null)
+        {
+            inflater.inflate(
+                    R.layout.friend_details_address,
+                    linFriendDataContainer,
+                    true);
+
+            TextView tvAddressData = findViewById(R.id.tvAddressData);
+            tvAddressData.setText(friend.getAddress());
+        }
+        else if((friend.getAddress() == null || friend.getAddress().isEmpty())
+                && !(relAddressDataContainer == null))
+        {
+            linFriendDataContainer.removeView(relAddressDataContainer);
         }
     }
 
@@ -402,6 +451,22 @@ public class FriendDetailsActivity extends AppCompatActivity {
         {
             startActivity(intent);
         }
+    }
+
+    /*
+       Starts FriendsMapActivity with friends location in the center and
+       all of the other friends locations. Since we are not using users
+       location we don't need any permissions. However if in the future we
+       would like to add users profile to application with location included,
+       we will need to add permision for accessing location (fine or course).
+
+       Also since last Google Play update, Google removed the need to
+       ask permission for the internet at all.
+    */
+    private void openFriendsMapAcivity()
+    {
+        Intent intent = new Intent(this, FriendsMapActivity.class);
+        startActivity(intent);
     }
 
     /*

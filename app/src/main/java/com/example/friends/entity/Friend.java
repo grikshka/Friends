@@ -16,15 +16,17 @@ public class Friend implements Serializable {
     private String phone;
     private Date birthday;
     private String email;
+    private String address;
     private String website;
     private boolean favorite;
     private String picturePath;
 
-    public Friend(String name, String phone, Date birthday, String email, String website, boolean favorite, String picturePath) {
+    public Friend(String name, String phone, Date birthday, String email, String address, String website, boolean favorite, String picturePath) {
         this.name = name;
         this.phone = phone;
         this.birthday = birthday;
         this.email = email;
+        this.address = address;
         this.website = website;
         this.favorite = favorite;
         this.picturePath = picturePath;
@@ -48,6 +50,10 @@ public class Friend implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setWebsite(String website) {
@@ -85,6 +91,10 @@ public class Friend implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public boolean isFavorite() {

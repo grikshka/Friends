@@ -34,6 +34,7 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
     private EditText etPhone;
     private MaterialButton btnBirthday;
     private EditText etEmail;
+    private EditText etAddress;
     private EditText etWebsite;
     private ImageView imgFavorite;
 
@@ -69,6 +70,7 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
         etPhone = view.findViewById(R.id.etPhone);
         btnBirthday = view.findViewById(R.id.btnBirthday);
         etEmail = view.findViewById(R.id.etEmail);
+        etAddress = view.findViewById(R.id.etAddress);
         etWebsite = view.findViewById(R.id.etWebsite);
         imgFavorite = view.findViewById(R.id.imgFavorite);
     }
@@ -113,6 +115,10 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
         if(friend.getEmail() != null)
         {
             etEmail.setText(friend.getEmail());
+        }
+        if(friend.getAddress() != null)
+        {
+            etAddress.setText(friend.getAddress());
         }
         if(friend.getWebsite() != null)
         {
@@ -159,6 +165,11 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
     public String getEmail()
     {
         return etEmail.getText().toString().trim();
+    }
+
+    public String getAddress()
+    {
+        return etAddress.getText().toString().trim();
     }
 
     public String getWebsite()

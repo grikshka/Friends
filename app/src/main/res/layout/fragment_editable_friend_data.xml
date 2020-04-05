@@ -125,10 +125,39 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linWebsiteContainer"
+        android:id="@+id/linAddressContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linEmailContainer"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/imgAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_address_small"
+            android:layout_gravity="center">
+        </ImageView>
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/address"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="8dp">
+
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linWebsiteContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linAddressContainer"
         android:orientation="horizontal"
         android:layout_marginTop="16dp">
 

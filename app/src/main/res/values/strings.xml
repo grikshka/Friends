@@ -10,7 +10,10 @@
     <string name="message">Message</string>
     <string name="phone_placeholder">+48 502 288 995</string>
     <string name="website">Website</string>
+    <string name="address">Address</string>
+    <string name="address_placeholder">Popowicka 146/27, Wroclaw</string>
     <string name="visit">Visit</string>
+    <string name="location">Location</string>
     <string name="website_placeholder">www.schemabuoi.github.io/grzegorz-charyszczak</string>
     <string name="birthday">Birthday</string>
     <string name="birthday_placeholder">01/01/2020</string>
