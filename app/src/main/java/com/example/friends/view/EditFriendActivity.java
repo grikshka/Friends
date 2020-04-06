@@ -67,8 +67,8 @@ public class EditFriendActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
-        setTitle("Friends Details");
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_cancel);
+        setTitle("Cancel");
     }
 
     /*

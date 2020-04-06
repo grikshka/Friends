@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relAddressDataContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_address_small">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tvAddressData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_toEndOf="@id/imgAddress"
+        android:layout_toRightOf="@id/imgAddress"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/address_placeholder"
+        android:textColor="@color/colorPrimaryDark">
+    </TextView>
+
+    <View
+        android:id="@+id/lineAddressDataSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/imgAddress"
+        android:background="@color/colorDisabled"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp"/>
+
+</RelativeLayout>

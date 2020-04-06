@@ -2,6 +2,8 @@
 <resources>
     <dimen name="profile_picture_width">90dp</dimen>
     <dimen name="profile_picture_height">90dp</dimen>
-    <dimen name="profile_picture_width_list">50dp</dimen>
-    <dimen name="profile_picture_height_list">50dp</dimen>
+    <dimen name="profile_picture_width_small">50dp</dimen>
+    <dimen name="profile_picture_height_small">50dp</dimen>
+    <dimen name="profile_picture_width_medium">50dp</dimen>
+    <dimen name="profile_picture_height_medium">50dp</dimen>
 </resources>

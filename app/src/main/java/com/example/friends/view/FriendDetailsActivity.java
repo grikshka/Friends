@@ -1,6 +1,5 @@
 package com.example.friends.view;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,12 +8,9 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -465,7 +461,9 @@ public class FriendDetailsActivity extends AppCompatActivity {
     */
     private void openFriendsMapAcivity()
     {
-        Intent intent = new Intent(this, FriendsMapActivity.class);
+        Intent intent = new Intent(this, FriendMapActivity.class);
+        intent.putExtra(FriendMapActivity.EXTRA_FRIEND,
+                friendDetailsViewModel.getFriend().getValue());
         startActivity(intent);
     }
 

@@ -312,7 +312,7 @@ public class EditableFriendPictureFragment extends Fragment {
                         app to avoid this problem
                      */
                     Uri imageUri = cameraImageUri;
-                    Bitmap bitmap = BitmapResolver.getBitmap(getContext().getContentResolver(), imageUri);
+                    Bitmap bitmap = BitmapResolver.getBitmapFromUri(getContext().getContentResolver(), imageUri);
                     String pathToImage = ImageFileHandler.saveImageToPrivateStorage(getContext(), bitmap);
                     setProfilePicture(pathToImage);
                     break;
@@ -326,7 +326,7 @@ public class EditableFriendPictureFragment extends Fragment {
                         app to avoid this problem
                      */
                     Uri imageUri = data.getData();
-                    Bitmap bitmap = BitmapResolver.getBitmap(getContext().getContentResolver(), imageUri);
+                    Bitmap bitmap = BitmapResolver.getBitmapFromUri(getContext().getContentResolver(), imageUri);
                     String pathToImage = ImageFileHandler.saveImageToPrivateStorage(getContext(), bitmap);
                     setProfilePicture(pathToImage);
                     break;
