@@ -51,7 +51,7 @@ public class ImageFileHandler {
     }
 
     /*
-        Method used for saving image from given path to private external storage.
+        Method used for saving bitmap to private external storage.
      */
     public static String saveImageToPrivateStorage(Context context, Bitmap bitmap)
     {

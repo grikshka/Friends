@@ -3,13 +3,17 @@ package com.example.friends.view;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.friends.R;
 import com.example.friends.entity.Friend;
 import com.example.friends.view.util.BitmapResolver;
@@ -38,23 +42,26 @@ public class FriendMapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_friend_map);
         Friend friend = (Friend) getIntent().getSerializableExtra(EXTRA_FRIEND);
 
-        setUpActionBar();
+        setUpActionBar(friend);
         loadMap(friend);
     }
 
     /*
         Method for setting action bar to our own customized toolbar
      */
-    private void setUpActionBar()
+    private void setUpActionBar(Friend friend)
     {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
-        setTitle("Friend Details");
+        setTitle(friend.getName());
     }
 
+    /*
+        Method used for loading and initializing a map.
+     */
     private void loadMap(final Friend friend)
     {
         SupportMapFragment fragmentMap = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentMap);
@@ -63,39 +70,54 @@ public class FriendMapActivity extends AppCompatActivity {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 map = googleMap;
-                LatLng friendsLocation = initializeFriendMarker(friend);
+                LatLng friendsLocation = LocationHelper.getLocationFromAddress(FriendMapActivity.this, friend.getAddress());
+                addFriendMarker(friend, friendsLocation);
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(friendsLocation, ZOOM_LEVEL));
             }
 
         });
     }
 
-    private LatLng initializeFriendMarker(Friend friend)
+    /*
+        Method for adding friends marker to the map
+     */
+    private void addFriendMarker(Friend friend, LatLng friendsLocation)
     {
-        LatLng friendsPosition = LocationHelper.getLocationFromAddress(this, friend.getAddress());
-        View markerView = initializeMarkerView(friend);
-
+        View markerView = initializeFriendMarkerView(friend);
         Bitmap markerBitmap = BitmapResolver.getBitmapFromView(markerView);
 
         MarkerOptions friendMarker = new MarkerOptions()
-                .position(friendsPosition)
+                .position(friendsLocation)
                 .icon(BitmapDescriptorFactory.fromBitmap(markerBitmap));
 
         map.addMarker(friendMarker);
-        return friendsPosition;
     }
 
-    private View initializeMarkerView(Friend friend)
+    /*
+        Method responsible for initializing view for friends marker
+     */
+    private View initializeFriendMarkerView(Friend friend)
     {
         View markerView = getLayoutInflater().inflate(R.layout.friend_marker, null);
         CircleImageView markerImage = markerView.findViewById(R.id.imgPicture);
         if(friend.getPicturePath() == null || friend.getPicturePath().isEmpty())
         {
-            markerImage.setImageDrawable(getResources().getDrawable(R.drawable.user_icon));
+            markerImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.user_icon));
         }
         else
         {
-            Glide.with(this).load(friend.getPicturePath()).into(markerImage);
+            /*
+                Since we are using Glide library in whole project for
+                loading images, I wanted to keep consitency and use it here
+                as well, but for some reason image is not being loaded sometimes
+                when we change users picture (i think it has something to do with
+                caching)
+             */
+//            Glide.with(this)
+//                    .load(friend.getPicturePath())
+//                    .into(markerImage);
+            Bitmap myBitmap = BitmapFactory.decodeFile(friend.getPicturePath());
+            markerImage.setImageBitmap(myBitmap);
         }
         return markerView;
     }

@@ -53,7 +53,7 @@ public class EditFriendActivity extends AppCompatActivity {
         fragmentPicture.setProfilePicture(editedFriend.getPicturePath());
 
         fragmentData = (EditableFriendDataFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentData);
-        fragmentData.setFriendData(editedFriend);
+        fragmentData.setDataViews(editedFriend);
 
         btnSave = findViewById(R.id.btnSave);
     }
@@ -129,7 +129,7 @@ public class EditFriendActivity extends AppCompatActivity {
     /*
         Method for saving friend. Gets all data from views and
         path to image from instance variable and sends this data
-        to AddFriendModel.
+        to EditFriendModel.
      */
     private void clickSave()
     {

@@ -2,8 +2,6 @@ package com.example.friends.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,10 +21,25 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHolder>
+public class FriendAdapter extends ListAdapter<Friend, FriendAdapter.FriendHolder>
 {
+    private OnItemClickListener listener;
 
-    private List<Friend> friendList;
+    public FriendAdapter() {
+        super(DIFF_CALLBACK);
+    }
+
+    private static DiffUtil.ItemCallback<Friend> DIFF_CALLBACK = new DiffUtil.ItemCallback<Friend>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Friend oldItem, @NonNull Friend newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Friend oldItem, @NonNull Friend newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
 
     @NonNull
     @Override
@@ -36,32 +51,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
 
     @Override
     public void onBindViewHolder(@NonNull FriendHolder holder, int position) {
-        if(friendList != null)
-        {
-            holder.setView(friendList.get(position));
-        }
-
+        holder.setView(getItem(position));
     }
 
-    @Override
-    public int getItemCount() {
-        if(friendList != null)
-        {
-            return friendList.size();
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
-    public void setFriendList(List<Friend> friendList)
-    {
-        this.friendList = friendList;
-        notifyDataSetChanged();
-    }
-
-    class FriendHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    class FriendHolder extends RecyclerView.ViewHolder
     {
         private Context context;
         private Friend friend;
@@ -73,12 +66,34 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
         public FriendHolder(@NonNull View itemView) {
             super(itemView);
             this.context = itemView.getContext();
+            initializeViews();
+            initializeListener(itemView);
+        }
+
+        private void initializeViews()
+        {
             imgProfilePicture = itemView.findViewById(R.id.imgProfilePicture);
             tvName = itemView.findViewById(R.id.tvName);
             imgFavorite = itemView.findViewById(R.id.imgFavorite);
-            itemView.setOnClickListener(this);
         }
 
+        private void initializeListener(View view)
+        {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION)
+                    {
+                        listener.onItemClick(friend);
+                    }
+                }
+            });
+        }
+
+        /*
+            Sets view to the data of passed friend object.
+         */
         public void setView(Friend friend)
         {
             this.friend = friend;
@@ -114,19 +129,15 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendHold
                     .load(pathToImage)
                     .into(imgProfilePicture);
         }
-
-        @Override
-        public void onClick(View v) {
-                startFriendDetailsActivity(v);
-        }
-
-        private void startFriendDetailsActivity(View v)
-        {
-            Intent intent = new Intent(v.getContext(), FriendDetailsActivity.class);
-            intent.putExtra(FriendDetailsActivity.EXTRA_FRIEND_ID, friend.getId());
-            v.getContext().startActivity(intent);
-        }
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(Friend friend);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
+        this.listener = listener;
+    }
 
 }

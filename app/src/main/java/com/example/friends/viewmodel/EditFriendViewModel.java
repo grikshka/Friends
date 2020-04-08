@@ -2,7 +2,6 @@ package com.example.friends.viewmodel;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.friends.entity.Friend;

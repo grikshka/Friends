@@ -149,12 +149,8 @@ public class EditableFriendPictureFragment extends Fragment {
         If all of the permissions are granted, invokes the takePhoto method.
         If not, asks for required permissions.
 
-        Writing permission is not required anymore for writing and reading private
-        external storage since API 18. However after taking a photo and saving it
-        to private external storage by camera, we will also copy image and save it
-        to public external storage to make it visible for user in gallery. This will
-        be done just for better UX, since we will still use image from private storage
-        across application for better protection over deleting images from gallery.
+        We need writing permission for being able to save taken picture in public
+        external storage.
      */
     private void takePhotoCheckPermission()
     {

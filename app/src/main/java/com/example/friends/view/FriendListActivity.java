@@ -103,7 +103,13 @@ public class FriendListActivity extends AppCompatActivity {
         friendsListViewModel.getAllFriends().observe(this, new Observer<List<Friend>>() {
             @Override
             public void onChanged(List<Friend> friends) {
-                adapter.setFriendList(friends);
+                adapter.submitList(friends);
+            }
+        });
+        adapter.setOnItemClickListener(new FriendAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Friend friend) {
+                startFriendDetailsActivity(friend);
             }
         });
     }
@@ -112,6 +118,13 @@ public class FriendListActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, AddFriendActivity.class);
         startActivity(intent);
+    }
+
+    private void startFriendDetailsActivity(Friend friend)
+    {
+        Intent intent = new Intent(this, FriendDetailsActivity.class);
+        intent.putExtra(FriendDetailsActivity.EXTRA_FRIEND_ID, friend.getId());
+         startActivity(intent);
     }
 
 }

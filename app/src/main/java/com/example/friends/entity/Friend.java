@@ -1,10 +1,14 @@
 package com.example.friends.entity;
 
+
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+
 import java.io.Serializable;
 import java.util.Date;
+
 
 @Entity
 public class Friend implements Serializable {
@@ -104,4 +108,28 @@ public class Friend implements Serializable {
     public String getPicturePath() {
         return picturePath;
     }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        Friend friend1 = (Friend) obj;
+        Friend friend2 = this;
+
+        if(friend1 == null)
+        {
+            return false;
+        }
+        else
+        {
+            return (friend1.name == null ? friend2.name == null : friend1.name.equals(friend2.name)) &&
+                    (friend1.phone == null ? friend2.phone == null : friend1.phone.equals(friend2.phone)) &&
+                    (friend1.birthday == null ? friend2.birthday == null : friend1.birthday.equals(friend2.birthday)) &&
+                    (friend1.email == null ? friend2.email == null : friend1.email.equals(friend2.email)) &&
+                    (friend1.address == null ? friend2.address == null : friend1.address.equals(friend2.address)) &&
+                    (friend1.website == null ? friend2.website == null : friend1.website.equals(friend2.website)) &&
+                    friend1.favorite == friend2.favorite &&
+                    (friend1.picturePath == null ? friend2.picturePath == null : friend1.picturePath.equals(friend2.picturePath));
+        }
+
+    }
+
 }

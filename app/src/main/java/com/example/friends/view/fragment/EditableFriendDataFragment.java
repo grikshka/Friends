@@ -38,6 +38,9 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
     private EditText etWebsite;
     private ImageView imgFavorite;
 
+    /*
+        Objects used for formatting date and getting current date
+     */
     private Calendar calendar;
     private SimpleDateFormat dateFormatter;
 
@@ -98,7 +101,11 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
         });
     }
 
-    public void setFriendData(Friend friend)
+    /*
+        Method used for setting the views using friends data that is
+        passed as a parameter
+     */
+    public void setDataViews(Friend friend)
     {
         if(friend.getName() != null)
         {
@@ -212,6 +219,10 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
         }
     }
 
+    /*
+        Method used for setting ImageView indicating if friend is favorite,
+        using passed boolean value
+     */
     public void setFavorite(boolean favorite)
     {
         if(favorite)
@@ -243,7 +254,7 @@ public class EditableFriendDataFragment extends Fragment implements DatePickerDi
     }
 
     /*
-        Method used by DatePicker, invoked after user selected some date.
+        Callback method used by DatePicker, invoked after user selected some date.
      */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ import java.text.SimpleDateFormat;
 
 public class FriendDetailsActivity extends AppCompatActivity {
 
+    public static final String TAG = "FriendDetailsActivity";
     public static final String EXTRA_FRIEND_ID = "EXTRA_FRIEND_ID";
     public static final String DATE_PATTERN = "dd/MM/yyyy";
 
@@ -187,23 +189,20 @@ public class FriendDetailsActivity extends AppCompatActivity {
      */
     private void updateActionViews(Friend friend)
     {
-        updatePhoneMessageActionView(friend);
+        updateCallActionView(friend);
+        updateMessageActionView(friend);
         updateEmailActionView(friend);
         updateWebsiteActionView(friend);
         updateAddressActionView(friend);
     }
 
-    private void updatePhoneMessageActionView(Friend friend)
+    private void updateCallActionView(Friend friend)
     {
         if(friend.getPhone() == null || friend.getPhone().isEmpty())
         {
             imgPhone.setImageResource(R.drawable.ic_phone_disabled);
             imgPhone.setOnClickListener(null);
             tvPhone.setTextColor(ContextCompat.getColor(this, R.color.colorDisabled));
-
-            imgMessage.setImageResource(R.drawable.ic_message_disabled);
-            imgMessage.setOnClickListener(null);
-            tvMessage.setTextColor(ContextCompat.getColor(this, R.color.colorDisabled));
         }
         else
         {
@@ -215,7 +214,19 @@ public class FriendDetailsActivity extends AppCompatActivity {
                 }
             });
             tvPhone.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        }
+    }
 
+    private void updateMessageActionView(Friend friend)
+    {
+        if(friend.getPhone() == null || friend.getPhone().isEmpty())
+        {
+            imgMessage.setImageResource(R.drawable.ic_message_disabled);
+            imgMessage.setOnClickListener(null);
+            tvMessage.setTextColor(ContextCompat.getColor(this, R.color.colorDisabled));
+        }
+        else
+        {
             imgMessage.setImageResource(R.drawable.ic_message_active);
             imgMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -223,7 +234,6 @@ public class FriendDetailsActivity extends AppCompatActivity {
                     openSendMessageActivity();
                 }
             });
-
             tvMessage.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
     }
@@ -501,6 +511,9 @@ public class FriendDetailsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /*
+        Opens dialog with confirmation if user wants to delete friend or not
+     */
     private void openDeleteFriendDialog()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
@@ -529,9 +542,9 @@ public class FriendDetailsActivity extends AppCompatActivity {
 
     /*
             Set dialog buttons style. Since we don't wanna customize the whole dialog,
-            this is the simplest way of achieving small visual changes. This could anyways
+            this is the simplest way of achieving small visual changes. This code anyways
             should be removed from here and we should create style for the dialog in res
-            folder
+            folder to keep visual aspects of application away from Java code
          */
     private void setDialogStyle(final AlertDialog alert)
     {
